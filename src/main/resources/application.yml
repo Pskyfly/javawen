@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    name: document  #????
+    url: jdbc:mysql://localhost:3306/document #url
+    username: root  #???
+    password: 123456  #??
+    driver-class-name: com.mysql.cj.jdbc.Driver  #???????
+  web:
+    resources:
+      static-locations: classpath:templates/,classpath:static/
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #配置映射文件
+  type-aliases-package: com.example.demo.bean #配置实体类

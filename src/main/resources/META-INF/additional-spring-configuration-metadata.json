@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "spring.mybatis.mapper-locations",
+      "type": "java.lang.String",
+      "description": "Description for spring.mybatis.mapper-locations."
+    },
+    {
+      "name": "spring.mybatis.type-aliases-package",
+      "type": "java.lang.String",
+      "description": "Description for spring.mybatis.type-aliases-package."
+    }
+  ] }
