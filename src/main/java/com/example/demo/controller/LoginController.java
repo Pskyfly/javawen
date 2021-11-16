@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
+
 @Controller
 public class LoginController {
 
-    @Autowired
+    @Resource
     UserService userService;
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -18,15 +20,16 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public UserT login(String name,String password){
-        UserT userBean = userService.loginIn(name,password);
-        if(userBean!=null){
-            UserT user=new UserT();
-            user.setPassword(password);
-            user.setName(name);
-            return user;
-        }
-        return null;
+    @RequestMapping(value = "/loginIn",method = RequestMethod.POST)
+    public String login(){
+//        UserT userBean = userService.loginIn(name,password);
+//        if(userBean!=null){
+//            UserT user=new UserT();
+//            user.setPassword(password);
+//            user.setName(name);
+//            return user;
+//        }
+//        return null;
+        return "content";
     }
 }

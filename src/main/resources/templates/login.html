@@ -93,7 +93,7 @@
     </div>
 
     <!-- 表单 -->
-    <form class="layui-form" action="" id="post">
+    <form class="layui-form" id="post" role="form">
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-inline">
@@ -130,21 +130,17 @@
     </div>
     <script>
         //Demo
-        layui.use('form', function () {
+        layui.use('form', function (message) {
             var form = layui.form;
 
-            //监听提交
+            // 监听提交
             form.on('submit(formDemo)', function (data) {
 
                 var items=document.getElementById("post");
+                alert(items.name.value, items.password.value);
                 $.ajax({
-                    url:"/login",
+                    url:"/loginIn",
                     type:"post",
-                    dataType:"json",
-                    data: {
-                        "name": items.name.value,
-                        "password":items.password.value,
-                    },
                 });
                 alert("结束");
             });

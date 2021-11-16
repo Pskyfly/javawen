@@ -4,10 +4,8 @@ import com.example.demo.bean.UserT;
 import com.example.demo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -19,7 +17,7 @@ class Demo2ApplicationTests {
     UserService userService;
     @Test
     public void contextLoads() {
-        UserT userBean = userService.loginIn("kate","123");
+        UserT userBean = userService.loginin("kate","123");
         System.out.println("该用户ID为：");
         System.out.println(userBean.getId());
     }
