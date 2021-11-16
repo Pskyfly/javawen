@@ -4,4 +4,8 @@
     <select id="getInfo" parameterType="com.example.demo.bean.UserT" resultType="com.example.demo.bean.UserT">
         SELECT * FROM usert WHERE name = #{name} AND password = #{password}
     </select>
+
+    <select id="getUserList" resultType="com.example.demo.bean.UserT">
+        select name,password from usert
+    </select>
 </mapper>
