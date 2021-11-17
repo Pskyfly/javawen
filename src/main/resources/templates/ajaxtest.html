@@ -128,35 +128,30 @@
     <a href="http://www.layui.com" class="layui-btn" style="width: 300%;">微信登录</a><br><br>
     <a href="http://www.layui.com" class="layui-btn layui-btn-primary" style="width: 300%;">支付宝登录</a>
 </div>
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     //Demo
-    var baseUrl = "http://localhost:8080"
     layui.use('form', function (message) {
         var form = layui.form;
 
         // 监听提交
         form.on('submit(formDemo)', function (data) {
-            var name = $("#name").val();
-            var password = $("#password").val();
-            var load = layer.load();
+
+            var items=document.getElementById("post");
+            alert(items.name.value, items.password.value);
             $.ajax({
-                url:"/login",
+                url:"/loginIn",
                 type:"post",
-                dataType:"json",
+                dataType:"form",
                 data:{
-                    name:name,
-                    password:password,
+                    name:items.name.value,
+                    password:items.password.value,
                 },
                 success:function (result) {
-                    if(result.status==200)
-                        window.location.assign("content.html");
-                    else alert("用户名密码错误");
-                },
-                error:function (){
-                    alert("未知错误");
+                    alert("成功！");
                 }
+
             });
+            alert("结束");
         });
     });
 </script>

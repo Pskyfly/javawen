@@ -1,0 +1,17 @@
+数据表格数据出不来：渲染表格的顺序不对，要确保先获取数据再渲染表格
+读取文件中的JSON数据时，必须在服务器环境下才行。
+
+想要正确地加载页面，就必须要在application.yml下添加
+  web:
+    resources:
+      static-locations: classpath:templates/,classpath:static/
+
+UserMapper要放在resource下的mapper目录下，和上面的类放在一起没有作用
+
+用ajax时忘记加ajax的依赖
+
+想要controller返回JSON格式的数据，必须要在springmvc.xml中加上：
+<mvc:annotation-driven></mvc:annotation-driven>
+然后要在需要返回JSON数据的上面加上注解：@ResponseBody
+JSON格式的数据需要用
+protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
