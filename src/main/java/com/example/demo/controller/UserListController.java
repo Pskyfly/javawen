@@ -32,4 +32,24 @@ public class UserListController {
         resultMap.put("count",users.size());
         return resultMap;
     }
+    @RequestMapping(value="/delete",method= RequestMethod.DELETE)
+    @ResponseBody
+    public Object deleteUser(String name)
+    {
+        UserT user=userService.findUserbynme(name);
+        resultMap.clear();
+        if(user==null)
+        {
+            resultMap.put("status",1);
+            resultMap.put("message","删除失败");
+            return resultMap;
+        }
+        else {
+            userService.deleteUser(user.getId());
+            resultMap.put("status",0);
+            resultMap.put("message","删除成功");
+            return resultMap;
+        }
+    }
+
 }

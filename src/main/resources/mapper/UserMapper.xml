@@ -18,5 +18,8 @@
         values (#{name},#{password},#{email},#{birthday},0);
     </select>
 
+    <select id="deleteUser" parameterType="int">
+        delete from usert where id = #{id}
+    </select>
 
 </mapper>

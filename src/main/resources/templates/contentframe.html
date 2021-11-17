@@ -9,7 +9,7 @@
     <script src="layui/layui.js"></script>
     <title>frame</title>
 </head>
-
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <body>
     <div style="position: fixed;top: 10%;left: 10%">
         <table id="demo" lay-filter="test"></table>
@@ -57,7 +57,24 @@
             if (layEvent === 'detail') { //查看
                 //do somehing
             } else if (layEvent === 'delete') { //删除
-                layer.confirm('真的删除行么', function (index) {
+                layer.confirm('真的删除该用户吗', function (index) {
+                    //alert(data.name);
+                    $.ajax({
+                        url:"/delete",
+                        type:"delete",
+                        dataType:"json",
+                        data:{
+                            name:data.name
+                        },
+                        success:function (result) {
+                            if(result.status==0)
+                                alert("删除成功");
+                            else alert("用户名密码错误");
+                        },
+                        error:function (){
+                            alert("未知错误");
+                        }
+                    });
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
                     //向服务端发送删除指令

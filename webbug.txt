@@ -19,3 +19,6 @@ protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 日期不要用date类型，直接用字符串类型。因为从前端返回回来的时候就是字符串，在传入数据库后会自动转换为date类型。
 
 List<UserT> list = new ArrayList<>();不要定义为null
+
+layui数据表格中
+data.name可以获取行工具栏的事件
