@@ -5,7 +5,18 @@
         SELECT * FROM usert WHERE name = #{name} AND password = #{password}
     </select>
 
-    <select id="getUserList" resultType="com.example.demo.bean.UserT">
-        select name,password from usert
+    <select id="getUserbyname" parameterType="String" resultType="com.example.demo.bean.UserT">
+        select * from usert where name=#{name};
     </select>
+
+    <select id="getUserList" resultType="com.example.demo.bean.UserT">
+        select * from usert
+    </select>
+    
+    <select id="addUser" parameterType="com.example.demo.bean.UserT">
+        insert into usert (name,password,email,birthday,money)
+        values (#{name},#{password},#{email},#{birthday},0);
+    </select>
+
+
 </mapper>

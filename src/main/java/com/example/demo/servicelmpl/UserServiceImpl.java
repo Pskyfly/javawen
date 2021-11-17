@@ -22,4 +22,19 @@ public class UserServiceImpl implements UserService {
         return userMapper.getInfo(user);
         //return new UserT();
     }
+
+    @Override
+    public void adduser(UserT user) {
+        userMapper.addUser(user);
+    }
+
+    @Override
+    public UserT findUserbynme(String name) {
+        return userMapper.getUserbyname(name);
+    }
+
+    @Override
+    public List<UserT> getUserList() {
+        return userMapper.getUserList();
+    }
 }

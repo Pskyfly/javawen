@@ -43,67 +43,91 @@
 </head>
 
 <body style="background-color: rgb(231, 238, 243);">
-    <div id="log">注册</div>
-    <div id="reg">
-        <form class="layui-form" action="" id="in">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <input type="text" name="name" required lay-verify="required" placeholder="用户名" autocomplete="off"
-                        class="layui-input" style="width: 200%;">
-                    <br>
-                    <input type="text" name="password" required lay-verify="required" placeholder="密码"
-                        autocomplete="off" class="layui-input" style="width: 200%;">
-                    <br>
-                    <input type="text" name="email" required lay-verify="required" placeholder="电子邮箱" autocomplete="off"
-                        class="layui-input" style="width: 200%;">
-                    <br>
-                    <!-- 日期 -->
-                    <input type="text" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
-                </div>
+<div id="log">注册</div>
+<div id="reg">
+    <form class="layui-form" action="" id="in">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <input type="text" name="name" required lay-verify="required" placeholder="用户名" autocomplete="off"
+                       class="layui-input" style="width: 200%;">
+                <br>
+                <input type="text" name="password" required lay-verify="required" placeholder="密码"
+                       autocomplete="off" class="layui-input" style="width: 200%;">
+                <br>
+                <input type="text" name="email" required lay-verify="required" placeholder="电子邮箱" autocomplete="off"
+                       class="layui-input" style="width: 200%;">
+                <br>
+                <!-- 日期 -->
+                <input type="text" name="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
             </div>
-            <br>
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo" style="width: 200%;">提交</button>
-                </div>
+        </div>
+        <br>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit lay-filter="formDemo" style="width: 200%;">提交</button>
             </div>
-            
-        </form>
-        <button class="layui-btn" style="width: 190%;" onclick="returntologin()">返回登录界面</button>
-    </div>
-    <script>
-        layui.use('laydate', function () {
-            var laydate = layui.laydate;
+        </div>
 
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#date' //指定元素
-            });
+    </form>
+    <button class="layui-btn" style="width: 190%;" onclick="returntologin()">返回登录界面</button>
+</div>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#date' //指定元素
         });
-        layui.use('form', function () {
-            var form = layui.form;
+    });
+    layui.use('form', function () {
+        var form = layui.form;
 
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-                dat=document.getElementById("in");
-                email=dat.email.value;
-                var em = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-                if (em.test(email) == true) {
-                    layer.msg(JSON.stringify(data.field));
-                    return false;
-                }
-                else{
-                    alert("请输入正确的邮箱");
-                }
-
-                
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            dat=document.getElementById("in");
+            email=dat.email.value;
+            var em = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            if (em.test(email) == true) {
+                //layer.msg(JSON.stringify(data.field));
+                var name = dat.name.value;
+                var password = dat.password.value;
+                var email=dat.email.value;
+                var birthday=dat.birthday.value;
+                $.ajax({
+                    url:"/register",
+                    type:"post",
+                    dataType:"json",
+                    data:{
+                        name:name,
+                        password:password,
+                        email:email,
+                        birthday:birthday
+                    },
+                    success:function (result) {
+                        if(result.status==200) {
+                            alert("注册成功");
+                            window.location.assign("register.html");
+                        }
+                        else alert("用户名已存在");
+                    },
+                    error:function (){
+                        alert("未知错误");
+                    }
+                });
                 return false;
-            });
+            }
+            else{
+                alert("请输入正确的邮箱");
+            }
+            return false;
         });
-        function returntologin(){
-            window.location.assign("login.html");
-        }
-    </script>
+    });
+    function returntologin(){
+        window.location.assign("login.html");
+    }
+</script>
 </body>
 
 </html>

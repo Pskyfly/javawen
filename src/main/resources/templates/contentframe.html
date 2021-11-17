@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div style="position: fixed;">
+    <div style="position: fixed;top: 10%;left: 10%">
         <table id="demo" lay-filter="test"></table>
     </div>
 
@@ -34,16 +34,7 @@
             table.render({
                 elem: '#demo'
                 , height: 312
-                //, url: "user.json"//数据接口
-                , data: 
-                    [{
-                    "id": "1",
-                    "name": "张三",
-                    "pwd": 123,
-                    "email": "zhangsan@qq.com",
-                    "birthday": "2000-09-09",
-                    "remain": "500"
-                    }]
+                , url: "/list"//数据接口
                 , page: true //开启分页
                 , cols: [[ //表头
                     { field: 'id', title: 'ID', width: 100, sort: true }

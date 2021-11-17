@@ -11,34 +11,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 @Controller
-public class LoginController {
-
+public class RegisterController {
     @Resource
     UserService userService;
 
     protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String show(){
-        return "login";
+        return "register";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
-    public Object Login(String name, String password, ModelMap modelMap){
-        UserT user = userService.loginin(name, password);
+    public Object Login(UserT user,ModelMap modelMap){
+
         resultMap.clear();
-        if(user!=null) {
-            resultMap.put("status", 200);
-            resultMap.put("message", "登录成功");
-            resultMap.put("id", "" + user.getId());
+        UserT auser = userService.findUserbynme(user.getName());
+        if(auser!=null||user.getName()==null) {
+            resultMap.put("status", 500);
+            resultMap.put("message", "用户已经存在");
+            //resultMap.put("id", "" + user.getId());
         }
         else
         {
-            resultMap.put("status", 500);
-            resultMap.put("message", "登录失败");
+            resultMap.put("status", 200);
+            resultMap.put("message", "注册成功");
+            userService.adduser(user);
         }
         return resultMap;
     }

@@ -137,8 +137,9 @@
 
         // 监听提交
         form.on('submit(formDemo)', function (data) {
-            var name = $("#name").val();
-            var password = $("#password").val();
+            dat=document.getElementById("post");
+            var name = dat.name.value;
+            var password = dat.password.value;
             var load = layer.load();
             $.ajax({
                 url:"/login",

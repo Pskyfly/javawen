@@ -10,7 +10,7 @@ public class UserT {
     private String name;
     private String password;
     private String email;
-    private Date birthday;
+    private String birthday;
     private float money;
 
 }

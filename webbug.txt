@@ -15,3 +15,7 @@ UserMapper要放在resource下的mapper目录下，和上面的类放在一起�
 然后要在需要返回JSON数据的上面加上注解：@ResponseBody
 JSON格式的数据需要用
 protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+
+日期不要用date类型，直接用字符串类型。因为从前端返回回来的时候就是字符串，在传入数据库后会自动转换为date类型。
+
+List<UserT> list = new ArrayList<>();不要定义为null
