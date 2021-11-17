@@ -13,5 +13,6 @@ public interface UserMapper
    UserT getUserbyname(String name);
    void addUser(UserT user);
    void deleteUser(int id);
+   void updateUser(UserT user);
 }
 

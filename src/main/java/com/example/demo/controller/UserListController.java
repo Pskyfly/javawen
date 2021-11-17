@@ -52,4 +52,23 @@ public class UserListController {
         }
     }
 
+    @RequestMapping(value="/update",method= RequestMethod.PUT)
+    @ResponseBody
+    public Object updateUser(UserT user)
+    {
+        UserT auser=userService.findUserbynme(user.getName());
+        resultMap.clear();
+        if(auser==null)
+        {
+            resultMap.put("status",1);
+            resultMap.put("message","修改失败");
+            return resultMap;
+        }
+        else {
+            userService.updateUser(user);
+            resultMap.put("status",0);
+            resultMap.put("message","修改成功");
+            return resultMap;
+        }
+    }
 }

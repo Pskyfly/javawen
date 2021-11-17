@@ -22,4 +22,8 @@
         delete from usert where id = #{id}
     </select>
 
+    <select id="updateUser" parameterType="com.example.demo.bean.UserT">
+        update usert set password=#{password}
+        where name = #{name}
+    </select>
 </mapper>

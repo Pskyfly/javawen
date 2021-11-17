@@ -10,4 +10,5 @@ public interface  UserService {
     UserT findUserbynme(String name);
     List<UserT> getUserList();
     void deleteUser(int id);
+    void updateUser(UserT user);
 }
