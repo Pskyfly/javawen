@@ -22,3 +22,9 @@ List<UserT> list = new ArrayList<>();不要定义为null
 
 layui数据表格中
 data.name可以获取行工具栏的事件
+
+在yml文件中指定访问静态资源的路径：
+resources:
+      static-locations: classpath:templates/,classpath:static/,classpath:image/,classpath:js/,classpath:css/
+
+引入js需要有先后顺序，例如layui的js需要先引入，引入的js放在前面，自己写的js放在后面

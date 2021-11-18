@@ -1,0 +1,67 @@
+@media screen and (max-width:3000px) {
+    #register {
+        background-color: dimgray;
+        width: 50%;
+        position: fixed;
+        height: 10%;
+        bottom: 0;
+        left: 0;
+    }
+
+    #forget {
+        background-color: dimgray;
+        width: 50%;
+        position: fixed;
+        height: 10%;
+        bottom: 0;
+        left: 50%;
+    }
+
+    #post {
+        position: fixed;
+        left: 55%;
+        top: 30%;
+    }
+
+    #qqweixin {
+        position: fixed;
+        left: 15%;
+        top: 30%;
+    }
+    #hand{
+        display: none;
+    }
+}
+
+@media screen and (max-width:650px) {
+    #register {
+        background-color: dimgray;
+        position: fixed;
+        width: 50%;
+        height: 10%;
+        bottom: 0%;
+    }
+
+    #forget {
+        background-color: dimgray;
+        width: 100%;
+        height: 10%;
+        position: fixed;
+        bottom: 0%;
+    }
+
+    #post {
+        position: fixed;
+        left: 13%;
+        top: 50%;
+    }
+
+    #divide {
+        display: none;
+    }
+    #qqweixin {
+        position: fixed;
+        left: 15%;
+        top: 20%;
+    }
+}
