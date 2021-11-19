@@ -37,10 +37,8 @@ public class ForgetController {
         }
         else
         {
-            UserT user=new UserT();
-            user.setName(name);
-            user.setPassword(password);
-            userService.updateUser(user);
+            auser.setPassword(password);
+            userService.updateUser(auser);
             resultMap.put("returncode",0);
             resultMap.put("message","修改成功");
         }

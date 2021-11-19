@@ -90,36 +90,25 @@ table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，tes
         });
     } else if (layEvent === 'update') { //编辑
         //同步更新缓存对应的值
-        var name,password;
-        // layer.prompt({
-        //     formType: 0,
-        //     value: data.password,
-        //     title:"修改密码"
-        // }, function (value, index) {//value为值，index为弹出层
-        //     password=value;
-        //     layer.close(index);
-        //     $.ajax({
-        //         url:"/update",
-        //         type:"put",
-        //         dataType:"json",
-        //         data:{
-        //             name:data.name,
-        //             password:password
-        //         },
-        //         success:function (result) {
-        //             if(result.status==0) {
-        //                 layer.msg("修改成功");
-        //                 obj.update({
-        //                     "name": name,
-        //                     "password":password,
-        //                 })
-        //             }
-        //             else layer.msg("用户名已经存在");
-        //         },
-        //         error:function (){
-        //             layer.msg("未知错误");
-        //         }
-        //     });
-        // })
+        $.ajax({
+            url:"prechoose",
+            method: "post",
+            dataType: "json",
+            data:{
+                name:data.name
+            },
+            error:function (){
+                layer.msg("未知错误");
+            }
+        });
+        layer.open({
+            type:2,
+            content:["changeuser.html","no"],
+            title:"修改用户",
+            area:["700px","600px"],
+            end:function () {
+                window.location.reload();
+            }
+        });
     }
 });
