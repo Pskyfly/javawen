@@ -37,7 +37,6 @@ public class UserListController {
         {
             if(userService.findUserbynme(name)==null)
             {
-
                 resultMap.put("msg", "用户不存在");
                 resultMap.put("count",0);
                 resultMap.put("data",null);
@@ -64,34 +63,6 @@ public class UserListController {
         resultMap.put("code", 0);
         if(Objects.equals(name, "")) {
 
-            List<UserT> users = userService.getUserList();
-            Object some = Tools.buildPage(users, limit, page);
-            resultMap.put("data", some);
-            resultMap.put("count", users.size());
-            resultMap.put("msg", "用户列表");
-            return resultMap;
-        }
-        else
-        {
-            if(userService.findUserbynme(name)==null)
-            {
-
-                resultMap.put("msg", "用户不存在");
-                resultMap.put("count",0);
-                resultMap.put("data",null);
-                return resultMap;
-            }
-            else
-            {
-                List<UserT> list = new ArrayList<>();
-                list.add(userService.findUserbynme(name));
-                resultMap.put("data",list);
-                resultMap.put("count", 1);
-                resultMap.put("msg","找到该用户");
-                return resultMap;
-            }
-        }
-    }
     @RequestMapping(value="/delete",method= RequestMethod.DELETE)
     @ResponseBody
     public Object deleteUser(String name)
@@ -118,17 +89,27 @@ public class UserListController {
     {
         UserT auser=userService.findUserbynme(user.getName());
         resultMap.clear();
-        if(auser==null)
+        if(auser!=null)
         {
             resultMap.put("status",1);
-            resultMap.put("message","修改失败");
+            resultMap.put("message","修改失败,用户名已经存在");
             return resultMap;
         }
         else {
+            user.setId(Tools.operatingUser.getId());
             userService.updateUser(user);
             resultMap.put("status",0);
             resultMap.put("message","修改成功");
             return resultMap;
         }
     }
+
+    @RequestMapping(value="/prechoose",method= RequestMethod.POST)
+    @ResponseBody
+    public Object preChooseuser(String name)
+    {
+        Tools.operatingUser.copyuser(userService.findUserbynme(name));
+        return 0;
+    }
+
 }

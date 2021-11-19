@@ -23,7 +23,7 @@
     </select>
 
     <select id="updateUser" parameterType="com.example.demo.bean.UserT">
-        update usert set password=#{password}
-        where name = #{name}
+        update usert set password=#{password},name=#{name},birthday=#{birthday},money=#{money},email=#{email}
+        where id = #{id}
     </select>
 </mapper>

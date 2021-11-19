@@ -3,8 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <title>个人中心</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="layui/layui.js"></script>
 </head>
 <body>
-    person
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">个人资料</li>
+        <li>修改密码</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form" action="" id="in">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" required lay-verify="required" placeholder="用户名" autocomplete="off"
+                               class="layui-input" style="width: 200%;">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出生日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">电子邮箱</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="email" required lay-verify="required" placeholder="电子邮箱" autocomplete="off"
+                               class="layui-input" style="width: 200%;">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">余额</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" required lay-verify="required" placeholder="余额" autocomplete="off"
+                               class="layui-input" style="width: 200%;">
+                    </div>
+                </div>
+                <div class="layui-input-inline" style="position: absolute;left: 15%">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" style="width: 200%;">提交</button>
+                </div>
+            </form>
+        </div>
+        <div class="layui-tab-item">内容2</div>
+    </div>
+</div>
+
+<script>
+    var name,password,email,money;
+
+    $(document).ready(function () {
+        $.ajax({
+            url:"/loginuser",
+            type: "get",
+            dataType: "json",
+            success:function (result) {
+
+            }
+        });
+    });
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#date' //指定元素
+        });
+    });
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            dat=document.getElementById("in");
+            email=dat.email.value;
+            var em = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            if (em.test(email) == true) {
+                //layer.msg(JSON.stringify(data.field));
+                name = dat.name.value;
+                email=dat.email.value;
+                birthday=dat.birthday.value;
+                money=dat.money.value;
+                $.ajax({
+                    url:"/selfupdate",
+                    type:"put",
+                    dataType:"json",
+                    data:{
+                        name:name,
+                        email:email,
+                        birthday:birthday,
+                        money:money
+                    },
+                    success:function (result) {
+                        if(result.status==0) {
+                            alert("修改成功");
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                        }
+                        else alert("用户名已存在");
+                    },
+                    error:function (){
+                        alert("未知错误");
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    }
+                });
+                return false;
+            }
+            else{
+                alert("请输入正确的邮箱");
+            }
+            return false;
+        });
+    });
+</script>
 </body>
 </html>

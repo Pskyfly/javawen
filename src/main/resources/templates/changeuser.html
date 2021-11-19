@@ -13,7 +13,7 @@
             #reg {
                 float: left;
                 position: fixed;
-                left: 30%;
+                left: 20%;
                 top: 20%;
             }
 
@@ -21,24 +21,10 @@
                 font-size: xx-large;
                 position: fixed;
                 top: 5%;
-                left: 47%;
+                left: 37%;
             }
         }
 
-        @media screen and (max-width:650px) {
-            #reg {
-                position: fixed;
-                top: 27%;
-                left: -25%;
-            }
-
-            #log {
-                font-size: xx-large;
-                position: fixed;
-                top: 5%;
-                left: 45%;
-            }
-        }
     </style>
 </head>
 
@@ -51,14 +37,15 @@
                 <input type="text" name="name" required lay-verify="required" placeholder="用户名" autocomplete="off"
                        class="layui-input" style="width: 200%;">
                 <br>
+                <!-- 日期 -->
+                <input type="text" name="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
+                <br>
                 <input type="text" name="password" required lay-verify="required" placeholder="密码"
                        autocomplete="off" class="layui-input" style="width: 200%;">
                 <br>
                 <input type="text" name="email" required lay-verify="required" placeholder="电子邮箱" autocomplete="off"
                        class="layui-input" style="width: 200%;">
-                <br>
-                <!-- 日期 -->
-                <input type="text" name="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
+
             </div>
         </div>
         <br>
@@ -68,7 +55,6 @@
             </div>
         </div>
     </form>
-    <button class="layui-btn" style="width: 190%;" onclick="returntologin()">返回登录界面</button>
 </div>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
@@ -79,11 +65,6 @@
         laydate.render({
             elem: '#date' //指定元素
         });
-    });
-    var forname;
-    window.addEventList('message',  (e) => {
-        console.log(e.data);
-        forname=e.data;
     });
     layui.use('form', function () {
         var form = layui.form;
@@ -108,15 +89,14 @@
                         password:password,
                         email:email,
                         birthday:birthday,
-                        forname:forname
                     },
                     success:function (result) {
                         if(result.status==0) {
                             alert("修改成功");
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
                         }
                         else alert("用户名已存在");
-                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                        parent.layer.close(index); //再执行关闭
                     },
                     error:function (){
                         alert("未知错误");
