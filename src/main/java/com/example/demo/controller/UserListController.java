@@ -18,12 +18,12 @@ public class UserListController {
     protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
     @RequestMapping(value="/list",method= RequestMethod.GET)
     @ResponseBody
-    public Object getUserList(int page, int limit)
+    public Object getUserList(int page, int limit,String name)
     {
         resultMap.clear();
         resultMap.put("status", 200);
         resultMap.put("code", 0);
-        String name=Tools.lastquery;
+//        String name=Tools.lastquery;
         if(Objects.equals(name, "")) {
 
             List<UserT> users = userService.getUserList();
@@ -62,7 +62,6 @@ public class UserListController {
         resultMap.clear();
         resultMap.put("status", 200);
         resultMap.put("code", 0);
-        Tools.lastquery=name;
         if(Objects.equals(name, "")) {
 
             List<UserT> users = userService.getUserList();

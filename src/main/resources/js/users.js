@@ -1,11 +1,14 @@
 //列出所有用户
 var table = layui.table;
-var str="lth";
+var str="";
 layui.use('table', function () {
     table.render({
         elem: '#demo'
         , height: 312
         ,id:'theusers'
+        ,where:{
+            name:str
+        }
         , url: "/list"//数据接口
         , page: true //开启分页
         , cols: [[ //表头
@@ -18,18 +21,17 @@ layui.use('table', function () {
             , { field: '编辑', toolbar: '#barDemo' }
         ]]
     });
+    return false;
 });
-
-
 //查找某一个用户
 //工具条事件
 layui.use('form', function(){
     var form = layui.form;
     //监听提交
     form.on('submit(findname)', function(data){
-        //alert(str);
         dat=document.getElementById("find");
-        str=  dat.findbyname.value;
+        str= dat.findbyname.value;
+
         layui.use('table', function () {
             table.render({
                 elem: '#demo'
@@ -52,6 +54,7 @@ layui.use('form', function(){
                 ]]
             });
         });
+        return false;
     });
 });
 
@@ -118,8 +121,5 @@ table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，tes
         //         }
         //     });
         // })
-        layer.open({
-
-        });
     }
 });
