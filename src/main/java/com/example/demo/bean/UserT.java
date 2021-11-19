@@ -11,7 +11,7 @@ public class UserT {
     private String password;
     private String email;
     private String birthday;
-    private float money;
+    private String money;
     public void copyuser(UserT user)
     {
         this.id=user.getId();

@@ -27,7 +27,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">出生日期</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
+                        <input type="text" name="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -40,7 +40,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">余额</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="money" required lay-verify="required" placeholder="余额" autocomplete="off"
+                        <input type="text" id="amoney" required lay-verify="required" placeholder="余额" autocomplete="off"
                                class="layui-input" style="width: 200%;">
                     </div>
                 </div>
@@ -54,7 +54,7 @@
 </div>
 
 <script>
-    var name,password,email,money;
+    var name,password,email,money,birthday;
 
     $(document).ready(function () {
         $.ajax({
@@ -65,17 +65,26 @@
                 var ret=result.data;
                 name=ret.name;
                 password=ret.password;
+                birthday=ret.birthday;
                 email=ret.email;
                 money=ret.money;
-                doc=document.getElementById("in");
-                doc.name.innerHTML=name;
-                doc.email.innerHTML=email;
-                doc.birthday.innerHTML=birthday;
-                doc.money.innerHTML=money;
+                document.getElementById("name").placeholder=name;
+                document.getElementById("email").placeholder=email;
+                document.getElementById("date").placeholder=birthday;
+                document.getElementById("amoney").placeholder=money;
             }
         });
+        return false;
     });
 
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#date' //指定元素
+        });
+    });
     layui.use('laydate', function () {
         var laydate = layui.laydate;
 
@@ -89,6 +98,7 @@
 
         //监听提交
         form.on('submit(formDemo)', function (data) {
+            alert("开始");
             dat=document.getElementById("in");
             email=dat.email.value;
             var em = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
@@ -96,11 +106,12 @@
                 //layer.msg(JSON.stringify(data.field));
                 name = dat.name.value;
                 email=dat.email.value;
-                birthday=dat.birthday.value;
-                money=dat.money.value;
+                birthday=dat.date.value;
+                money=dat.amoney.value;
+                alert(money);
                 $.ajax({
                     url:"/selfupdate",
-                    type:"put",
+                    type:"post",
                     dataType:"json",
                     data:{
                         name:name,
@@ -109,17 +120,10 @@
                         money:money
                     },
                     success:function (result) {
-                        if(result.status==0) {
-                            alert("修改成功");
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
-                        }
-                        else alert("用户名已存在");
+                        alert(result.message);
                     },
                     error:function (){
                         alert("未知错误");
-                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                        parent.layer.close(index); //再执行关闭
                     }
                 });
                 return false;
@@ -129,6 +133,7 @@
             }
             return false;
         });
+        return false;
     });
 </script>
 </body>

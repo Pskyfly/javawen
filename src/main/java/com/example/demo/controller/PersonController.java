@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
+
 @Controller
 public class PersonController {
     @Resource
@@ -34,7 +36,7 @@ public class PersonController {
     @ResponseBody
     public Object Selfupdate(UserT user){
         resultMap.clear();
-        if(userService.findUserbynme(user.getName())!=null)
+        if(userService.findUserbynme(user.getName())!=null&& !Objects.equals(user.getName(), nowUser.nowuser.getName()))
         {
             resultMap.put("status",500);
             resultMap.put("message","用户名重复");
@@ -42,6 +44,7 @@ public class PersonController {
         }
         else {
             user.setId(nowUser.nowuser.getId());
+            user.setPassword(nowUser.nowuser.getPassword());
             userService.updateUser(user);
             resultMap.put("status", 200);
             resultMap.put("message", "个人信息修改成功");
