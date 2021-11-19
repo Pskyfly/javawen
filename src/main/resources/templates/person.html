@@ -20,27 +20,27 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户名</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="name" required lay-verify="required" placeholder="用户名" autocomplete="off"
+                        <input type="text" name="name" id="name",required lay-verify="required" placeholder="用户名" autocomplete="off"
                                class="layui-input" style="width: 200%;">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">出生日期</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
+                        <input type="text" id="birthday" class="layui-input" id="date" placeholder="出生日期" style="width: 200%;">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">电子邮箱</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="email" required lay-verify="required" placeholder="电子邮箱" autocomplete="off"
+                        <input type="text" id="email" required lay-verify="required" placeholder="电子邮箱" autocomplete="off"
                                class="layui-input" style="width: 200%;">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">余额</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="name" required lay-verify="required" placeholder="余额" autocomplete="off"
+                        <input type="text" id="money" required lay-verify="required" placeholder="余额" autocomplete="off"
                                class="layui-input" style="width: 200%;">
                     </div>
                 </div>
@@ -62,7 +62,16 @@
             type: "get",
             dataType: "json",
             success:function (result) {
-
+                var ret=result.data;
+                name=ret.name;
+                password=ret.password;
+                email=ret.email;
+                money=ret.money;
+                doc=document.getElementById("in");
+                doc.name.innerHTML=name;
+                doc.email.innerHTML=email;
+                doc.birthday.innerHTML=birthday;
+                doc.money.innerHTML=money;
             }
         });
     });

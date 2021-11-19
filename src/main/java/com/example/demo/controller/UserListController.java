@@ -63,6 +63,34 @@ public class UserListController {
         resultMap.put("code", 0);
         if(Objects.equals(name, "")) {
 
+            List<UserT> users = userService.getUserList();
+            Object some = Tools.buildPage(users, limit, page);
+            resultMap.put("data", some);
+            resultMap.put("count", users.size());
+            resultMap.put("msg", "用户列表");
+            return resultMap;
+        }
+        else
+        {
+            if(userService.findUserbynme(name)==null)
+            {
+
+                resultMap.put("msg", "用户不存在");
+                resultMap.put("count",0);
+                resultMap.put("data",null);
+                return resultMap;
+            }
+            else
+            {
+                List<UserT> list = new ArrayList<>();
+                list.add(userService.findUserbynme(name));
+                resultMap.put("data",list);
+                resultMap.put("count", 1);
+                resultMap.put("msg","找到该用户");
+                return resultMap;
+            }
+        }
+    }
     @RequestMapping(value="/delete",method= RequestMethod.DELETE)
     @ResponseBody
     public Object deleteUser(String name)
