@@ -12,5 +12,13 @@ public class UserT {
     private String email;
     private String birthday;
     private float money;
-
+    public void copyuser(UserT user)
+    {
+        this.id=user.getId();
+        this.name=user.getName();
+        this.password=user.getPassword();
+        this.email=user.getEmail();
+        this.birthday=user.getBirthday();
+        this.money=user.getMoney();
+    }
 }

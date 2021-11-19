@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.example.demo.tools.nowUser.nowuser;
+
 @Controller
 public class LoginController {
 
@@ -34,6 +36,7 @@ public class LoginController {
             resultMap.put("status", 200);
             resultMap.put("message", "登录成功");
             resultMap.put("id", "" + user.getId());
+            nowuser.copyuser(user);
         }
         else
         {

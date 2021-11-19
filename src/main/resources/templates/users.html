@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <title>frame</title>
+</head>
+<body>
+        <div>
+            <form class="layui-form" action="" style="position: fixed;left: 10%;top: 25%">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <input type="text" name="findbyname" required  lay-verify="required" placeholder="请输入要查找的用户" autocomplete="off" class="layui-input">
+                    </div>
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">查找</button>
+                </div>
+            </form>
+        </div>
+        <div style="position: fixed;top: 30%;left: 10%;color: #b2b2b2">
+            <table id="demo" lay-filter="test"></table>
+        </div>
+
+
+<!-----------------------以下是js------------------------>
+    <script src="layui/layui.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/html" id="barDemo">
+        <div class="layui-btn-container">
+            <a class="layui-btn layui-btn-sm" lay-event="update">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="delete">删除</a>
+        </div>
+    </script>
+    <script>
+        //Demo
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+    </script>
+
+    <script src="users.js"></script>
+
+</body>
+</html>

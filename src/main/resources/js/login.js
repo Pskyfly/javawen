@@ -19,7 +19,7 @@ layui.use('form', function (message) {
             },
             success:function (result) {
                 if(result.status==200)
-                    window.location.assign("content.html");
+                    window.location.assign("main.html");
                 else alert("用户名密码错误");
             },
             error:function (){

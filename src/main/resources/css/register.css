@@ -15,16 +15,16 @@
 }
 
 @media screen and (max-width:650px) {
-    #reg {
-        position: fixed;
-        top: 27%;
-        left: -25%;
-    }
+    /*#reg {*/
+    /*    position: fixed;*/
+    /*    top: 27%;*/
+    /*    left: -25%;*/
+    /*}*/
 
-    #log {
-        font-size: xx-large;
-        position: fixed;
-        top: 10%;
-        left: 45%;
-    }
+    /*#log {*/
+    /*    font-size: xx-large;*/
+    /*    position: fixed;*/
+    /*    top: 10%;*/
+    /*    left: 45%;*/
+    /*}*/
 }

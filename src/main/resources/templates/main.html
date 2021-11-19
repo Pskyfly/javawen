@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>综合管理系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="layui/layui.js"></script>
+</head>
+<body>
+<!--水平导航-->
+<div>
+    <ul class="layui-nav layui-bg-green">
+        <li class="layui-nav-item">
+            <a style="font-size: larger">用户综合管理系统</a>
+        </li>
+        <li class="layui-nav-item" style="position: absolute;right: 5%">
+            <a href=""><i class="layui-icon layui-icon-username"></i> 我</a>
+            <dl class="layui-nav-child">
+                <dd><a href="login.html">退出</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+<!--水平导航-->
+
+<!--垂直导航-->
+<div>
+    <ul class="layui-nav layui-nav-tree" lay-filter="test" style="position: absolute;bottom: 0%;top: 8.3%">
+        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+        <li class="layui-nav-item"><a href="welcome.html" target="frame">首页</a></li>
+        <li class="layui-nav-item layui-nav-itemed">
+            <a>功能模块</a>
+            <dl class="layui-nav-child">
+                <dd><a href="person.html" target="frame">个人中心</a></dd>
+                <dd><a href="users.html" target="frame">用户管理</a></dd>
+                <dd><a href="docs.html" target="frame">文章管理</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+<!--垂直导航-->
+<div id="content" style="position: fixed;left: 13%;right: 0%;bottom: 0%;top: 8.3%">
+    <iframe id="frame" name="frame" scrolling="no"
+            src="welcome.html" frameborder="0" height=100% width=100%></iframe>
+</div>
+
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+</body>
+</html>

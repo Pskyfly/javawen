@@ -6,9 +6,9 @@ layui.use('laydate', function () {
         elem: '#date' //指定元素
     });
 });
-layui.use('form', function () {
+layui.use(['form'], function () {
     var form = layui.form;
-
+    //var layer=layui.layer;
     //监听提交
     form.on('submit(formDemo)', function (data) {
         var dat=document.getElementById("in");
@@ -17,13 +17,26 @@ layui.use('form', function () {
             alert("两次密码不一致！");
             return false;
         }
-        // email = prompt("请输入邮箱：");
-        // var em = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-        // if (em.test(email) == true) {
-        //     alert('密码修改为:'+dat.password.value);
-        //     return false;
-        // }
-        return false;
+        var name=dat.name.value;
+        var last=dat.last.value;
+        var password=dat.password.value;
+        $.ajax({
+            url:"/forget",
+            type:"post",
+            dataType:"json",
+            data:{
+                name:name,
+                last:last,
+                password:password,
+            },
+            success:function (result) {
+                alert(result.message);
+                //layer.msg(result.message);
+            },
+            error:function (){
+                alert("未知错误");
+            }
+        });
     });
 });
 
