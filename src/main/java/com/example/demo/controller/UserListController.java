@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class UserListController {
@@ -23,14 +21,77 @@ public class UserListController {
     public Object getUserList(int page, int limit)
     {
         resultMap.clear();
-        List<UserT> users=userService.getUserList();
-        Object some = Tools.buildPage(users,limit,page);
-        resultMap.put("data",some);
-        resultMap.put("status",200);
-        resultMap.put("code",0);
-        resultMap.put("msg","用户列表");
-        resultMap.put("count",users.size());
-        return resultMap;
+        resultMap.put("status", 200);
+        resultMap.put("code", 0);
+        String name=Tools.lastquery;
+        if(Objects.equals(name, "")) {
+
+            List<UserT> users = userService.getUserList();
+            Object some = Tools.buildPage(users, limit, page);
+            resultMap.put("data", some);
+            resultMap.put("count", users.size());
+            resultMap.put("msg", "用户列表");
+            return resultMap;
+        }
+        else
+        {
+            if(userService.findUserbynme(name)==null)
+            {
+
+                resultMap.put("msg", "用户不存在");
+                resultMap.put("count",0);
+                resultMap.put("data",null);
+                return resultMap;
+            }
+            else
+            {
+                List<UserT> list = new ArrayList<>();
+                list.add(userService.findUserbynme(name));
+                resultMap.put("data",list);
+                resultMap.put("count", 1);
+                resultMap.put("msg","找到该用户");
+                return resultMap;
+            }
+        }
+    }
+    @RequestMapping(value="/list",method= RequestMethod.POST)
+    @ResponseBody
+    public Object getnewUserList(int page, int limit,String name)
+    {
+        //System.out.println(name);
+        resultMap.clear();
+        resultMap.put("status", 200);
+        resultMap.put("code", 0);
+        Tools.lastquery=name;
+        if(Objects.equals(name, "")) {
+
+            List<UserT> users = userService.getUserList();
+            Object some = Tools.buildPage(users, limit, page);
+            resultMap.put("data", some);
+            resultMap.put("count", users.size());
+            resultMap.put("msg", "用户列表");
+            return resultMap;
+        }
+        else
+        {
+            if(userService.findUserbynme(name)==null)
+            {
+
+                resultMap.put("msg", "用户不存在");
+                resultMap.put("count",0);
+                resultMap.put("data",null);
+                return resultMap;
+            }
+            else
+            {
+                List<UserT> list = new ArrayList<>();
+                list.add(userService.findUserbynme(name));
+                resultMap.put("data",list);
+                resultMap.put("count", 1);
+                resultMap.put("msg","找到该用户");
+                return resultMap;
+            }
+        }
     }
     @RequestMapping(value="/delete",method= RequestMethod.DELETE)
     @ResponseBody
