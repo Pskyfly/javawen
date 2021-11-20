@@ -17,4 +17,9 @@ public interface  UserService {
     List<Userwrites> getWriterList();
     Userwrites getWriterbyname(String username);
     List<Doc> getDocListbyname(String username);
+    void deleteDocbyid(int id);
+    Doc findDocbyid(int id);
+    void updateWriter(Userwrites writer);
+    void addDoc(Doc doc);
+    void updateDoc(Doc doc);
 }

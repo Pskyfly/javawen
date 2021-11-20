@@ -14,4 +14,17 @@
     <select id="getDoclistbywriter" parameterType="String" resultType="com.example.demo.bean.Doc">
         select * from docs where username= #{username}
     </select>
+    <select id="deleteDocbyid" parameterType="int">
+        delete from docs where id=#{id}
+    </select>
+    <select id="findDocbyid" parameterType="int" resultType="com.example.demo.bean.Doc">
+        select * from docs where id=#{id}
+    </select>
+    <select id="addDoc" parameterType="com.example.demo.bean.Doc">
+        insert into docs (username,title,content)
+        values (#{username},#{title},#{content})
+    </select>
+    <select id="updateDoc" parameterType="com.example.demo.bean.Doc">
+        update docs set title=#{title},content=#{content} where id=#{id}
+    </select>
 </mapper>

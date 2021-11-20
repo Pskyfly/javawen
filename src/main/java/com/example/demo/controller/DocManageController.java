@@ -129,4 +129,70 @@ public class DocManageController {
             return resultMap;
         }
     }
+    @RequestMapping(value="/deletedoc",method= RequestMethod.DELETE)
+    @ResponseBody
+    public Object deleteDoc(int id)
+    {
+        resultMap.clear();
+        if(userService.findDocbyid(id)!=null)
+        {
+            userService.deleteDocbyid(id);
+            resultMap.put("status",200);
+            resultMap.put("message","删除成功");
+            int lcount=Tools.operatingwriter.getCount();
+            Tools.operatingwriter.setCount(lcount-1);
+            userService.updateWriter(Tools.operatingwriter);
+        }
+        else
+        {
+            resultMap.put("status",500);
+            resultMap.put("message","文档不存在");
+        }
+        return resultMap;
+    }
+    @RequestMapping(value="/adddoc",method= RequestMethod.POST)
+    @ResponseBody
+    public Object addDoc(String title,String content)
+    {
+        resultMap.clear();
+        Doc doc=new Doc();
+        doc.setTitle(title);
+        doc.setContent(content);
+        doc.setUsername(Tools.operatingwriter.getUsername());//给文章赋予作者
+        Tools.operatingwriter.setCount(Tools.operatingwriter.getCount()+1);//当前作者文章数量加一
+        userService.updateWriter(Tools.operatingwriter);//修改数据库
+        userService.addDoc(doc);
+        resultMap.put("status",200);
+        resultMap.put("message","添加成功");
+        return resultMap;
+    }
+    @RequestMapping(value="/updateDoc",method= RequestMethod.POST)
+    @ResponseBody
+    public Object updateDoc(String title,String content)
+    {
+        resultMap.clear();
+        Doc doc=new Doc();
+        doc.setTitle(title);
+        doc.setContent(content);
+        doc.setUsername(Tools.operatingwriter.getUsername());//给文章赋予作者
+        doc.setId(Tools.operatingDoc.getId());
+        userService.updateDoc(doc);
+        resultMap.put("data",doc);
+        resultMap.put("status",200);
+        resultMap.put("message","修改成功");
+        return resultMap;
+    }
+    @RequestMapping(value="/prechoosedoc",method= RequestMethod.POST)
+    @ResponseBody
+    public Object prechooseDoc(int id)
+    {
+        Doc doc=userService.findDocbyid(id);
+        Tools.operatingDoc.setContent(doc.getContent());
+        Tools.operatingDoc.setTitle(doc.getTitle());
+        Tools.operatingDoc.setUsername(Tools.operatingwriter.getUsername());
+        Tools.operatingDoc.setId(id);
+        resultMap.put("status",200);
+        resultMap.put("message","已经确认当前操作的文档");
+        return resultMap;
+    }
 }

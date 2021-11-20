@@ -68,4 +68,29 @@ public class UserServiceImpl implements UserService {
     public List<Doc> getDocListbyname(String username) {
         return docMapper.getDoclistbywriter(username);
     }
+
+    @Override
+    public void deleteDocbyid(int id) {
+        docMapper.deleteDocbyid(id);
+    }
+
+    @Override
+    public Doc findDocbyid(int id) {
+        return docMapper.findDocbyid(id);
+    }
+
+    @Override
+    public void updateWriter(Userwrites writer) {
+        docMapper.updateWriter(writer);
+    }
+
+    @Override
+    public void addDoc(Doc doc) {
+        docMapper.addDoc(doc);
+    }
+
+    @Override
+    public void updateDoc(Doc doc) {
+        docMapper.updateDoc(doc);
+    }
 }

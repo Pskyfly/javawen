@@ -90,7 +90,7 @@ table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，tes
                     id:data.id
                 },
                 success:function (result) {
-                    if(result.status==0)
+                    if(result.status==200)
                         layer.msg("删除成功");
                     else layer.msg("文章不存在");
                 },

@@ -14,6 +14,7 @@ public class Tools {
     private static final String DATA = "data";
     public static UserT operatingUser = new UserT();
     public static Userwrites operatingwriter=new Userwrites();
+    public static Doc operatingDoc = new Doc();
     public static Object userBuildPage(List<UserT> datas, int limits, int nowpage) {
         List<UserT> list = new ArrayList<>();
         for(int i=(nowpage-1)*limits;i< datas.size()&&i<(nowpage-1)*limits+limits;i++)
