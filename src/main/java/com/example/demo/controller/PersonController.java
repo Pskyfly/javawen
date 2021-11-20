@@ -65,4 +65,24 @@ public class PersonController {
         nowUser.setUser(user);
         return resultMap;
     }
+
+    @RequestMapping(value = "/updatepassword",method = RequestMethod.POST)
+    @ResponseBody
+    public Object Updatepassword(String lastpassword,String newpassword){
+        resultMap.clear();
+        if(Objects.equals(lastpassword, nowUser.nowuser.getPassword()))
+        {
+            nowUser.nowuser.setPassword(newpassword);
+            userService.updateUser(nowUser.nowuser);
+            resultMap.put("status",200);
+            resultMap.put("message","修改密码成功");
+        }
+        else
+        {
+            resultMap.put("status",500);
+            resultMap.put("message","原密码错误");
+        }
+        return resultMap;
+    }
+
 }

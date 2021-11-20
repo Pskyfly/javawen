@@ -26,5 +26,7 @@ layui.use('form', function (message) {
                 alert("未知错误");
             }
         });
+        return false;
     });
+    return false;
 });

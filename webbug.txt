@@ -30,8 +30,6 @@ resources:
 引入js需要有先后顺序，例如layui的js需要先引入，引入的js放在前面，自己写的js放在后面
 
 form.on('submit(findname)', function(data){}）中，这个匿名函数必须要有return false，否则会自动刷新，
-导致查询的结果消失。
+导致查询的结果消失。这个不要漏掉，很重要。
 
 修改用户信息的时候直接把id传过去，这样就不需要知道原先的用户名
-
-git使用要小心

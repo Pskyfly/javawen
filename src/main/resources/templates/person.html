@@ -14,6 +14,7 @@
         <li>修改密码</li>
     </ul>
     <div class="layui-tab-content">
+<!------------------------------第一模块：修改信息------------------------------------------------->
         <div class="layui-tab-item layui-show">
             <form class="layui-form" action="" id="in">
 
@@ -49,8 +50,35 @@
                 </div>
             </form>
         </div>
-        <div class="layui-tab-item">内容2</div>
+<!----------------------------第二模块：修改密码-------------------------------------------------->
+        <div class="layui-tab-item">
+            <form class="layui-form" action="" id="pwd">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">原密码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="lastpassword" required  lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">新密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="newpassword" required  lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">确认密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="comfirmpassword" required  lay-verify="required" placeholder="请输入确认密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-input-inline" style="position: absolute;left: 15%">
+                    <button class="layui-btn" lay-submit lay-filter="passwordsubmit" style="width: 200%;">提交</button>
+                </div>
+            </form>
+        </div>
+        <!-----------------------------第二模块结束----------------------->
     </div>
+
 </div>
 
 <script>
@@ -96,9 +124,9 @@
     layui.use('form', function () {
         var form = layui.form;
 
-        //监听提交
+        //修改信息的事件--------------------------------------
         form.on('submit(formDemo)', function (data) {
-            alert("开始");
+            //alert("开始");
             dat=document.getElementById("in");
             email=dat.email.value;
             var em = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
@@ -130,6 +158,37 @@
             }
             else{
                 alert("请输入正确的邮箱");
+            }
+            return false;
+        });
+
+        //修改密码的事件--------------------------------
+        form.on('submit(passwordsubmit)', function (data) {
+            dat=document.getElementById("pwd");
+            var lastpassword=dat.lastpassword.value;
+            var newpassword=dat.newpassword.value;
+            var comfirmpassword=dat.comfirmpassword.value;
+            if (newpassword==comfirmpassword) {
+                //layer.msg(JSON.stringify(data.field));
+                $.ajax({
+                    url:"/updatepassword",
+                    type:"post",
+                    dataType:"json",
+                    data:{
+                        lastpassword:lastpassword,
+                        newpassword:newpassword
+                    },
+                    success:function (result) {
+                        alert(result.message);
+                    },
+                    error:function (){
+                        alert("未知错误");
+                    }
+                });
+                return false;
+            }
+            else{
+                alert("两次密码不一致");
             }
             return false;
         });
