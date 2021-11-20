@@ -54,5 +54,42 @@ public class DocManageController {
         }
     }
 
+    @RequestMapping(value="/setOperatingWriter",method= RequestMethod.GET)
+    @ResponseBody
+    public Object setOperating(String name)
+    {
+        resultMap.clear();
+        Userwrites writer=userService.getWriterbyname(name);
+        if(writer==null)
+        {
+            resultMap.put("status",500);
+            resultMap.put("message","作者不存在");
+        }
+        else
+        {
+            Tools.operatingwriter.copyWriter(writer);
+            resultMap.put("status",200);
+            resultMap.put("message","找到该作者");
+        }
+        return resultMap;
+    }
+    @RequestMapping(value="/getOperatingWriter",method= RequestMethod.GET)
+    @ResponseBody
+    public Object getOperating()
+    {
+        resultMap.clear();
 
+        if(Tools.operatingUser==null)
+        {
+            resultMap.put("status",500);
+            resultMap.put("message","您未登录");
+        }
+        else
+        {
+            resultMap.put("status",200);
+            resultMap.put("message","已登录");
+            resultMap.put("data",Tools.operatingwriter);
+        }
+        return resultMap;
+    }
 }

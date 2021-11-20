@@ -20,7 +20,11 @@ layui.use('form', function (message) {
             success:function (result) {
                 if(result.status==200)
                     window.location.assign("main.html");
-                else alert("用户名密码错误");
+                else
+                {
+                    alert("用户名密码错误");
+                    window.location.reload();
+                }
             },
             error:function (){
                 alert("未知错误");
@@ -28,5 +32,5 @@ layui.use('form', function (message) {
         });
         return false;
     });
-    return false;
+    //return false;
 });

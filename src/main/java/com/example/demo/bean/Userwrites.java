@@ -8,4 +8,11 @@ public class Userwrites {
     private String username;
     private int count;
 
+    public void copyWriter(Userwrites writer)
+    {
+        this.id=writer.getId();
+        this.username=writer.getUsername();
+        this.count=writer.getCount();
+    }
+
 }

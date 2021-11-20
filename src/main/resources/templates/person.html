@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>个人中心</title>
+    <title>frame</title>
     <link rel="stylesheet" href="layui/css/layui.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="layui/layui.js"></script>
@@ -82,7 +82,6 @@
 </div>
 
 <script>
-    var name,password,email,money,birthday;
 
     $(document).ready(function () {
         $.ajax({
@@ -91,6 +90,8 @@
             dataType: "json",
             success:function (result) {
                 var ret=result.data;
+                if(ret.name==null) return false;
+                var name,password,email,money,birthday;
                 name=ret.name;
                 password=ret.password;
                 birthday=ret.birthday;
@@ -102,17 +103,8 @@
                 document.getElementById("amoney").placeholder=money;
             }
         });
-        return false;
     });
 
-    layui.use('laydate', function () {
-        var laydate = layui.laydate;
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#date' //指定元素
-        });
-    });
     layui.use('laydate', function () {
         var laydate = layui.laydate;
 
@@ -136,7 +128,6 @@
                 email=dat.email.value;
                 birthday=dat.date.value;
                 money=dat.amoney.value;
-                alert(money);
                 $.ajax({
                     url:"/selfupdate",
                     type:"post",

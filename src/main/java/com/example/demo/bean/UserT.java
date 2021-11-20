@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-@Data
+@Data//注解，设置set和get方法
 public class UserT {
     private int id;
     private String name;

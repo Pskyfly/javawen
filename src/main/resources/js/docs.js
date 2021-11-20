@@ -15,7 +15,7 @@ layui.use('table', function () {
             { field: 'id', title: 'ID', width: 300, sort: true }
             , { field: 'username', title: '学生姓名', width: 300 }
             , { field: 'count', title: '文章数量', width: 300 }
-            , { field: '编辑', toolbar: '#barDemo' }
+            , { field: '进入文章管理', toolbar: '#barDemo' }
         ]]
     });
     return false;
@@ -43,7 +43,7 @@ layui.use('form', function(){
                     { field: 'id', title: 'ID', width: 300, sort: true }
                     , { field: 'username', title: '学生姓名', width: 300 }
                     , { field: 'count', title: '文章数量', width: 300 }
-                    , { field: '编辑', toolbar: '#barDemo' }
+                    , { field: '进入文章管理', toolbar: '#barDemo' }
                 ]]
             });
         });
@@ -56,6 +56,10 @@ table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，tes
     var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
     var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
     if (layEvent === 'update') { //编辑
+        $.ajax({
+
+        });
         window.location.assign("docmanage.html");
     }
+    return false;
 });

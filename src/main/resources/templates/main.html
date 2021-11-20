@@ -17,7 +17,7 @@
         <li class="layui-nav-item" style="position: absolute;right: 5%">
             <a href=""><i class="layui-icon layui-icon-username"></i> 我</a>
             <dl class="layui-nav-child">
-                <dd><a href="login.html">退出</a></dd>
+                <dd><a href="login.html" onclick="logout()">退出</a></dd>
             </dl>
         </li>
     </ul>
@@ -44,6 +44,29 @@
     <iframe id="frame" name="frame" scrolling="no"
             src="welcome.html" frameborder="0" height=100% width=100%></iframe>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url:"/getlogstatus",
+            success:function (result) {
+                if(result.logstatus==0)
+                    window.location.assign("404.html");
+                else layer.msg("欢迎");
+            },
+            error:function (result) {
+                alert("未知错误");
+            }
+        })
+        return false;
+    });
+    function logout() {
+        $.ajax({
+            url:"/logout",
+            error:function (result) {
+               alert("退出失败");
+            }
+        });
+    }
+</script>
 </body>
 </html>
