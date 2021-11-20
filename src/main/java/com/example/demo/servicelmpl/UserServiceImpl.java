@@ -1,6 +1,8 @@
 package com.example.demo.servicelmpl;
 
 import com.example.demo.bean.UserT;
+import com.example.demo.bean.Userwrites;
+import com.example.demo.mapper.DocMapper;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private  UserMapper userMapper;
+
+    @Resource
+    private DocMapper docMapper;
 
     @Override
     public UserT loginin(String name, String password) {
@@ -46,5 +51,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(UserT user) {
         userMapper.updateUser(user);
+    }
+
+    @Override
+    public List<Userwrites> getWriterList() {
+        return docMapper.getWriterList();
+    }
+
+    @Override
+    public Userwrites getWriterbyname(String username) {
+        return docMapper.getWriterbyname(username);
     }
 }

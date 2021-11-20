@@ -27,7 +27,7 @@ public class UserListController {
         if(Objects.equals(name, "")) {
 
             List<UserT> users = userService.getUserList();
-            Object some = Tools.buildPage(users, limit, page);
+            Object some = Tools.userBuildPage(users, limit, page);
             resultMap.put("data", some);
             resultMap.put("count", users.size());
             resultMap.put("msg", "用户列表");
@@ -64,7 +64,7 @@ public class UserListController {
         if(Objects.equals(name, "")) {
 
             List<UserT> users = userService.getUserList();
-            Object some = Tools.buildPage(users, limit, page);
+            Object some = Tools.userBuildPage(users, limit, page);
             resultMap.put("data", some);
             resultMap.put("count", users.size());
             resultMap.put("msg", "用户列表");

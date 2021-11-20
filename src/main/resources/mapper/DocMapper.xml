@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.DocMapper">
+    <select id="getWriterList" resultType="com.example.demo.bean.Userwrites">
+        SELECT * FROM userwrites
+    </select>
+    <select id="getWriterbyname" parameterType="String" resultType="com.example.demo.bean.Userwrites">
+        SELECT * FROM userwrites where username=#{username}
+    </select>
+    <select id="updateWriter" parameterType="com.example.demo.bean.Userwrites" resultType="com.example.demo.bean.Userwrites">
+        update userwrites set username = #{username},count = #{count}
+        where id=#{id}
+    </select>
+</mapper>
