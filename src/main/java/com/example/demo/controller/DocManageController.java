@@ -82,13 +82,14 @@ public class DocManageController {
         if(Tools.operatingUser==null)
         {
             resultMap.put("status",500);
-            resultMap.put("message","您未登录");
+            resultMap.put("message","未获取当前作者");
         }
         else
         {
             resultMap.put("status",200);
-            resultMap.put("message","已登录");
-            resultMap.put("data",Tools.operatingwriter);
+            resultMap.put("message","获取当前作者");
+            String name=Tools.operatingwriter.getUsername();
+            resultMap.put("data",userService.findUserbynme(name));
         }
         return resultMap;
     }

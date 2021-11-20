@@ -57,7 +57,14 @@ table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，tes
     var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
     if (layEvent === 'update') { //编辑
         $.ajax({
-
+            url:"setOperatingWriter",
+            dataType:"json",
+            data:{
+                name:data.username
+            },
+            error:function (result) {
+                alert("未知错误");
+            }
         });
         window.location.assign("docmanage.html");
     }

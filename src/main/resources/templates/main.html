@@ -45,20 +45,20 @@
             src="welcome.html" frameborder="0" height=100% width=100%></iframe>
 </div>
 <script>
-    $(document).ready(function () {
-        $.ajax({
-            url:"/getlogstatus",
-            success:function (result) {
-                if(result.logstatus==0)
-                    window.location.assign("404.html");
-                else layer.msg("欢迎");
-            },
-            error:function (result) {
-                alert("未知错误");
-            }
-        })
-        return false;
-    });
+    // $(document).ready(function () {
+    //     $.ajax({
+    //         url:"/getlogstatus",
+    //         success:function (result) {
+    //             if(result.logstatus==0)
+    //                 window.location.assign("404.html");
+    //             else layer.msg("欢迎");
+    //         },
+    //         error:function (result) {
+    //             alert("未知错误");
+    //         }
+    //     })
+    //     return false;
+    // });
     function logout() {
         $.ajax({
             url:"/logout",

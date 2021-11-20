@@ -3,8 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>文章管理</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="layui/layui.js"></script>
 </head>
 <body>
-    docmanage
+<a style="position: fixed;left: 40%;font-size: xx-large;top: 2%">用户信息</a>
+<div style="position: fixed;left: 15%;top: 10%">
+<br>
+    <button type="button" class="layui-btn layui-btn-normal" style="width: 150px">姓名</button>
+    <button type="button" class="layui-btn layui-btn-warm" style="width: 700px" id="name"></button><br><br>
+    <button type="button" class="layui-btn layui-btn-normal" style="width: 150px">邮箱</button>
+    <button type="button" class="layui-btn layui-btn-warm" style="width: 700px" id="email"></button><br><br>
+    <button type="button" class="layui-btn layui-btn-normal" style="width: 150px">生日</button>
+    <button type="button" class="layui-btn layui-btn-warm" style="width: 700px" id="birthday"></button><br><br>
+    <button type="button" class="layui-btn layui-btn-normal" style="width: 150px">余额</button>
+    <button type="button" class="layui-btn layui-btn-warm" style="width: 700px" id="money"></button><br><br>
+</div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url:"/getOperatingWriter",
+            type: "get",
+            dataType: "json",
+            success:function (result) {
+                var ret=result.data;
+                var name,password,email,money,birthday;
+                name=ret.name;
+                birthday=ret.birthday;
+                email=ret.email;
+                money=ret.money;
+                document.getElementById("name").innerHTML=name;
+                document.getElementById("email").innerHTML=email;
+                document.getElementById("birthday").innerHTML=birthday;
+                document.getElementById("money").innerHTML=money;
+            }
+        });
+    });
+</script>
 </body>
 </html>
