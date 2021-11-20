@@ -11,4 +11,7 @@
         update userwrites set username = #{username},count = #{count}
         where id=#{id}
     </select>
+    <select id="getDoclistbywriter" parameterType="String" resultType="com.example.demo.bean.Doc">
+        select * from docs where username= #{username}
+    </select>
 </mapper>

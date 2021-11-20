@@ -1,5 +1,6 @@
 package com.example.demo.servicelmpl;
 
+import com.example.demo.bean.Doc;
 import com.example.demo.bean.UserT;
 import com.example.demo.bean.Userwrites;
 import com.example.demo.mapper.DocMapper;
@@ -61,5 +62,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Userwrites getWriterbyname(String username) {
         return docMapper.getWriterbyname(username);
+    }
+
+    @Override
+    public List<Doc> getDocListbyname(String username) {
+        return docMapper.getDoclistbywriter(username);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.bean.Doc;
 import com.example.demo.bean.UserT;
 import com.example.demo.bean.Userwrites;
 import org.springframework.stereotype.Repository;
@@ -11,4 +12,5 @@ public interface DocMapper {
     List<Userwrites> getWriterList();
     Userwrites getWriterbyname(String username);
     void updateWriter(Userwrites writer);
+    List<Doc> getDoclistbywriter(String username);
 }

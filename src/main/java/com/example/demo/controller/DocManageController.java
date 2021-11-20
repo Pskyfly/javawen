@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.bean.Doc;
+import com.example.demo.bean.UserT;
 import com.example.demo.bean.Userwrites;
 import com.example.demo.service.UserService;
 import com.example.demo.tools.Tools;
@@ -92,5 +94,39 @@ public class DocManageController {
             resultMap.put("data",userService.findUserbynme(name));
         }
         return resultMap;
+    }
+
+    @RequestMapping(value="/getdocs",method= RequestMethod.GET)
+    @ResponseBody
+    public Object getUserList(int page, int limit,String title)
+    {
+        resultMap.clear();
+        resultMap.put("status", 200);
+        resultMap.put("code", 0);
+//        String name=Tools.lastquery;
+        List<Doc> docs = userService.getDocListbyname(Tools.operatingwriter.getUsername());
+        if(Objects.equals(title, "")) {
+            Object some = Tools.docBuildPage(docs, limit, page);
+            resultMap.put("data", some);
+            resultMap.put("count", docs.size());
+            resultMap.put("msg", "用户列表");
+            return resultMap;
+        }
+        else
+        {
+            System.out.println(title);
+            List<Doc> some=new ArrayList<Doc>();
+            for (int i=0;i<docs.size();i++)
+            {
+                if(Objects.equals(docs.get(i).getTitle(), title)||title==null)
+                {
+                    some.add(docs.get(i));
+                }
+            }
+            resultMap.put("count",some.size());
+            resultMap.put("data",Tools.docBuildPage(some,limit,page));
+            resultMap.put("message","找到了记录");
+            return resultMap;
+        }
     }
 }

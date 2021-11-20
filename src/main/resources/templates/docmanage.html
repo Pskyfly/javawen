@@ -19,27 +19,32 @@
     <button type="button" class="layui-btn layui-btn-warm" style="width: 700px" id="birthday"></button><br><br>
     <button type="button" class="layui-btn layui-btn-normal" style="width: 150px">余额</button>
     <button type="button" class="layui-btn layui-btn-warm" style="width: 700px" id="money"></button><br><br>
+    <hr style="position: fixed;left: 0%;width: 120%">
 </div>
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url:"/getOperatingWriter",
-            type: "get",
-            dataType: "json",
-            success:function (result) {
-                var ret=result.data;
-                var name,password,email,money,birthday;
-                name=ret.name;
-                birthday=ret.birthday;
-                email=ret.email;
-                money=ret.money;
-                document.getElementById("name").innerHTML=name;
-                document.getElementById("email").innerHTML=email;
-                document.getElementById("birthday").innerHTML=birthday;
-                document.getElementById("money").innerHTML=money;
-            }
-        });
-    });
+
+
+<div>
+    <form class="layui-form" action="" id="find" style="position: fixed;left: 12%;top: 55%">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <input type="text" id="findbyname" placeholder="请输入要查找的文章" autocomplete="off" class="layui-input">
+            </div>
+            <button class="layui-btn" lay-submit lay-filter="findname">查找</button>
+        </div>
+    </form>
+</div>
+
+
+<div style="position: fixed;top: 60%;left: 12%;color: #b2b2b2">
+    <table id="demo" lay-filter="test"></table>
+</div>
+
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-container">
+        <a class="layui-btn layui-btn-sm" lay-event="update">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="delete">删除</a>
+    </div>
 </script>
+<script src="docmanage.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.bean.Doc;
 import com.example.demo.bean.UserT;
 import com.example.demo.bean.Userwrites;
 
@@ -15,4 +16,5 @@ public interface  UserService {
 //  -------------------------------------------
     List<Userwrites> getWriterList();
     Userwrites getWriterbyname(String username);
+    List<Doc> getDocListbyname(String username);
 }
