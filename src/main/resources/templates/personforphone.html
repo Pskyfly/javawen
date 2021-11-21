@@ -10,6 +10,21 @@
     <script src="layui/layui.js"></script>
 </head>
 <body>
+<!--水平导航-->
+<div>
+    <ul class="layui-nav layui-bg-green">
+        <li class="layui-nav-item">
+            <a style="font-size: larger">用户综合管理系统</a>
+        </li>
+        <li class="layui-nav-item" style="position: absolute;right: 5%">
+            <a><i class="layui-icon layui-icon-username"></i> 我</a>
+            <dl class="layui-nav-child">
+                <dd><a href="login.html" onclick="logout()">退出</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+<!--水平导航-->
 <div class="layui-tab">
     <ul class="layui-tab-title">
         <li class="layui-this">个人资料</li>

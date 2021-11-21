@@ -1,3 +1,34 @@
+//echarts图标
+var myChart = echarts.init(document.getElementById('main'),'vintage');
+
+$.get('/getwriterdata').done(function(data) {
+    // data 的结构:
+    // {
+    //     categories: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+    //     values: [5, 20, 36, 10, 10, 20]
+    // }
+    myChart.setOption({
+        title: {
+            text: '学生发表文章统计'
+        },
+        tooltip: {},
+        legend: {},
+        xAxis: {
+            data: data.categories
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '文章数量',
+                type: 'bar',
+                data: data.values,
+                itemStyle:{  normal:{color:'#FFA500'}}
+            }
+        ],
+
+    });
+});
+//---------------------------------------------------------------
 //列出所有用户
 var table = layui.table;
 var str="";
