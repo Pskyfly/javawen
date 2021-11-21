@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="layui/css/layui.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="layui/layui.js"></script>
+    <script src="echarts.js"></script>
+    <script src="customed.js"></script>
 </head>
 <body>
 <div>
@@ -21,9 +23,40 @@
 <div style="position: fixed;top: 10%;left: 10%;color: #b2b2b2">
     <table id="demo" lay-filter="test"></table>
 </div>
-
+<div id="main" style="width: 1000px;height:300px;top: 400px;left: 100px"></div>
 
 <!-----------------------以下是js------------------------>
+<script>
+    var myChart = echarts.init(document.getElementById('main'),'vintage');
+
+    $.get('/getwriterdata').done(function(data) {
+        // data 的结构:
+        // {
+        //     categories: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+        //     values: [5, 20, 36, 10, 10, 20]
+        // }
+        myChart.setOption({
+            title: {
+                text: '学生发表文章统计'
+            },
+            tooltip: {},
+            legend: {},
+            xAxis: {
+                data: data.categories
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: '文章数量',
+                    type: 'bar',
+                    data: data.values,
+                    itemStyle:{  normal:{color:'#FFA500'}}
+                }
+            ],
+
+        });
+    });
+</script>
 <script src="layui/layui.js"></script>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/html" id="barDemo">

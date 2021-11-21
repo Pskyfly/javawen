@@ -194,4 +194,24 @@ public class DocManageController {
         resultMap.put("message","已经确认当前操作的文档");
         return resultMap;
     }
+    @RequestMapping(value="/getwriterdata",method= RequestMethod.GET)
+    @ResponseBody
+    public Object getWriters()
+    {
+        resultMap.clear();
+        List<Userwrites> writers=userService.getWriterList();
+        List<String> categories=new ArrayList<String>();
+        List<Integer> values=new ArrayList<Integer>();
+        for(int i=0;i<writers.size();i++)
+        {
+            Userwrites temp=writers.get(i);
+            categories.add(temp.getUsername());
+            values.add(temp.getCount());
+        }
+        resultMap.put("status",200);
+        resultMap.put("message","已经获取作者信息");
+        resultMap.put("categories",categories);
+        resultMap.put("values",values);
+        return resultMap;
+    }
 }
