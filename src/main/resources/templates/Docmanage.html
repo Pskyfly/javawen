@@ -34,6 +34,8 @@
     </form>
 </div>
 
+<button type="button" class="layui-btn layui-btn-warm" style="position: fixed;top: 55%;right: 20%" onclick=addDoc()>
+    <i class="layui-icon layui-icon-addition"></i>添加文章</button>
 
 <div style="position: fixed;top: 60%;left: 12%;color: #b2b2b2">
     <table id="demo" lay-filter="test"></table>
@@ -44,6 +46,21 @@
         <a class="layui-btn layui-btn-sm" lay-event="update">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="delete">删除</a>
     </div>
+</script>
+<script>
+    function addDoc() {
+        let layer = layui.layer;
+
+        layer.open({
+            type:2,
+            content:["DocAddition.html","no"],
+            title:"新建用户",
+            area:["700px","600px"],
+            end:function () {
+                window.location.reload();
+            }
+        });
+    }
 </script>
 <script src="docmanage.js"></script>
 </body>

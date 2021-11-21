@@ -66,7 +66,7 @@ table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，tes
                 alert("未知错误");
             }
         });
-        window.location.assign("docmanage.html");
+        window.location.assign("Docmanage.html");
     }
     return false;
 });

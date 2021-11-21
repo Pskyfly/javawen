@@ -114,7 +114,6 @@ public class DocManageController {
         }
         else
         {
-            System.out.println(title);
             List<Doc> some=new ArrayList<Doc>();
             for (int i=0;i<docs.size();i++)
             {
@@ -150,7 +149,7 @@ public class DocManageController {
         }
         return resultMap;
     }
-    @RequestMapping(value="/adddoc",method= RequestMethod.POST)
+    @RequestMapping(value="/addDoc",method= RequestMethod.POST)
     @ResponseBody
     public Object addDoc(String title,String content)
     {
