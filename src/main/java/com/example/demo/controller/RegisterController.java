@@ -18,11 +18,6 @@ public class RegisterController {
 
     protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
-    @RequestMapping(value = "/register",method = RequestMethod.GET)
-    public String show(){
-        return "register";
-    }
-
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
     public Object Login(UserT user,ModelMap modelMap){

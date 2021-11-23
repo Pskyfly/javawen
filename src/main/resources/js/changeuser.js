@@ -8,7 +8,6 @@ layui.use('laydate', function () {
 });
 layui.use('form', function () {
     var form = layui.form;
-
     //监听提交
     form.on('submit(formDemo)', function (data) {
         dat=document.getElementById("in");

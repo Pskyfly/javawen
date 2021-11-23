@@ -4,7 +4,6 @@ var str="";
 layui.use('table', function () {
     table.render({
         elem: '#demo'
-        , height: 312
         ,id:'theusers'
         ,where:{
             name:str
@@ -24,18 +23,14 @@ layui.use('table', function () {
     return false;
 });
 //查找某一个用户
-//工具条事件
 layui.use('form', function(){
     var form = layui.form;
-    //监听提交
     form.on('submit(findname)', function(data){
         dat=document.getElementById("find");
         str= dat.findbyname.value;
-
         layui.use('table', function () {
             table.render({
                 elem: '#demo'
-                , height: 312
                 ,id:'theusers'
                 , url: "/list"//数据接口
                 ,method:'post'

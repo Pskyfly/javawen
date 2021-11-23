@@ -24,11 +24,6 @@ public class LoginController {
 
     protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String show(){
-        return "login";
-    }
-
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public Object Login(String name, String password, ModelMap modelMap){
@@ -49,6 +44,7 @@ public class LoginController {
         }
         return resultMap;
     }
+
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     @ResponseBody
     public Object Logout(){

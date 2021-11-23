@@ -2,7 +2,6 @@
 var baseUrl = "http://localhost:8080"
 layui.use('form', function (message) {
     var form = layui.form;
-
     // 监听提交
     form.on('submit(formDemo)', function (data) {
         dat=document.getElementById("post");

@@ -57,7 +57,6 @@ public class UserListController {
     @ResponseBody
     public Object getnewUserList(int page, int limit,String name)
     {
-        //System.out.println(name);
         resultMap.clear();
         resultMap.put("status", 200);
         resultMap.put("code", 0);
@@ -74,7 +73,6 @@ public class UserListController {
         {
             if(userService.findUserbynme(name)==null)
             {
-
                 resultMap.put("msg", "用户不存在");
                 resultMap.put("count",0);
                 resultMap.put("data",null);
@@ -125,6 +123,7 @@ public class UserListController {
         }
         else {
             user.setId(Tools.operatingUser.getId());
+            Tools.operatingUser.copyuser(user);
             userService.updateUser(user);
             resultMap.put("status",0);
             resultMap.put("message","修改成功");

@@ -5,7 +5,7 @@ $(document).ready(function () {
             if(result.logstatus==0)
                 window.location.assign("404.html");
             else {
-                if(document.body.clientWidth<1000)
+                if(document.body.clientWidth<900)
                     window.location.assign("person.html");
                 layer.msg("欢迎");
             }

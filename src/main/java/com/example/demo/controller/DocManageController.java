@@ -202,9 +202,7 @@ public class DocManageController {
         List<Userwrites> writers=userService.getWriterList();
         List<String> categories=new ArrayList<String>();
         List<Integer> values=new ArrayList<Integer>();
-        for(int i=0;i<writers.size();i++)
-        {
-            Userwrites temp=writers.get(i);
+        for (Userwrites temp : writers) {
             categories.add(temp.getUsername());
             values.add(temp.getCount());
         }

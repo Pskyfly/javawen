@@ -14,3 +14,5 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
   type-aliases-package: com.example.demo.bean #配置实体类
 
+server:
+  port: 8089

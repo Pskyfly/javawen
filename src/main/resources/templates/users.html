@@ -10,20 +10,21 @@
     <title>frame</title>
 </head>
 <body>
-    <div>
-        <form class="layui-form" action="" id="find" style="position: fixed;left: 10%;top: 25%">
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <input type="text" id="findbyname" placeholder="请输入要查找的用户" autocomplete="off" class="layui-input">
+    <div style="position: fixed;top: 1%">
+        <div>
+            <form class="layui-form" action="" id="find">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <input type="text" id="findbyname" placeholder="请输入要查找的用户" autocomplete="off" class="layui-input">
+                    </div>
+                    <button class="layui-btn" lay-submit lay-filter="findname">查找</button>
                 </div>
-                <button class="layui-btn" lay-submit lay-filter="findname">查找</button>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div>
+            <table id="demo" lay-filter="test"></table>
+        </div>
     </div>
-    <div style="position: fixed;top: 30%;left: 10%;color: #b2b2b2">
-        <table id="demo" lay-filter="test"></table>
-    </div>
-
 
     <!-----------------------以下是js------------------------>
     <script src="layui/layui.js"></script>

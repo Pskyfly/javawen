@@ -1,6 +1,5 @@
-//echarts图标
+//echarts图表
 var myChart = echarts.init(document.getElementById('main'),'vintage');
-
 $.get('/getwriterdata').done(function(data) {
     // data 的结构:
     // {
@@ -25,7 +24,6 @@ $.get('/getwriterdata').done(function(data) {
                 itemStyle:{  normal:{color:'#FFA500'}}
             }
         ],
-
     });
 });
 //---------------------------------------------------------------
