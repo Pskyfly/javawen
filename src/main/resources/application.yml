@@ -1,14 +1,22 @@
 spring:
   datasource:
-    name: document  #????
-    url: jdbc:mysql://localhost:3306/document #url
-    username: root  #???
-    password: 123456  #??
-    driver-class-name: com.mysql.jdbc.Driver  #???????
+    name: document
+    url: jdbc:mysql://localhost:3306/document
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
   web:
     resources:
       static-locations: classpath:templates/,classpath:static/,classpath:image/,classpath:js/,classpath:css/
-
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+  session:
+    redis:
+      namespace: spring:session:demo
+      flush-mode: on_save
+    store-type: redis
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
@@ -16,3 +24,15 @@ mybatis:
 
 server:
   port: 8080
+
+##redis配置
+#  spring.redis.database=0
+#  spring.redis.host=localhost
+#  spring.redis.port=6379
+#  spring.redis.password=123456
+#  #设置存储格式
+#  spring.session.redis.namespace=spring:session:demo
+#  #设置session刷新ON_SAVE（表示在response commit前刷新缓存），IMMEDIATE（表示只要有更新，就刷新缓存）
+#  spring.session.redis.flush-mode=on_save
+#  # 选择使用redis 作为session存储
+#  spring.session.store-type=redis

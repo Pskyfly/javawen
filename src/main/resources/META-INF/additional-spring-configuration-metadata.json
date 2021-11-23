@@ -14,5 +14,10 @@
       "name": "accessFile.resourceHandler",
       "type": "java.lang.String",
       "description": "Description for accessFile.resourceHandler."
+    },
+    {
+      "name": "spring.session.redis.store-type",
+      "type": "java.lang.String",
+      "description": "Description for spring.session.redis.store-type."
     }
   ] }
