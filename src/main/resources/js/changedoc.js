@@ -26,3 +26,16 @@ layui.use('form', function(){
         return false;
     });
 });
+
+$(document).ready(function () {
+    $.ajax({
+        url:"/getoperatingdoc",
+        type: "get",
+        dataType: "json",
+        success:function (result) {
+            var ret=result.data;
+            document.getElementById("title").value=ret.title;
+            document.getElementById("content").value=ret.content;
+        }
+    });
+});

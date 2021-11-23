@@ -20,10 +20,10 @@ $(document).ready(function () {
             birthday=ret.birthday;
             email=ret.email;
             money=ret.money;
-            document.getElementById("name").placeholder=name;
-            document.getElementById("email").placeholder=email;
-            document.getElementById("date").placeholder=birthday;
-            document.getElementById("amoney").placeholder=money;
+            document.getElementById("name").value=name;
+            document.getElementById("email").value=email;
+            document.getElementById("date").value=birthday;
+            document.getElementById("amoney").value=money;
         }
     });
 });

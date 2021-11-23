@@ -9,23 +9,27 @@
     <script src="echarts.js"></script>
 </head>
 <body>
-<hr style="position: fixed;left: 0%;width: 120%;top: 54%;">
 <div>
-    <form class="layui-form" action="" id="find" style="position: fixed;left: 10%;top: 5%">
-        <div class="layui-form-item">
-            <div class="layui-input-inline">
-                <input type="text" id="findbyname" placeholder="请输入要查找的用户" autocomplete="off" class="layui-input">
-            </div>
-            <button class="layui-btn" lay-submit lay-filter="findname">查找</button>
+    <hr style="position: fixed;left: 0%;width: 120%;top: 54%;">
+    <div style="background: white">
+        <div>
+            <form class="layui-form" action="" id="find" style="position: fixed;left: 10%;top: 5%">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <input type="text" id="findbyname" placeholder="请输入要查找的用户" autocomplete="off" class="layui-input">
+                    </div>
+                    <button class="layui-btn" lay-submit lay-filter="findname">查找</button>
+                </div>
+            </form>
         </div>
-    </form>
+        <div style="position: fixed;top: 10%;left: 10%;">
+            <table id="demo" lay-filter="test"></table>
+        </div>
+    </div>
+    <div style="background: white">
+        <div id="main" style="width: 1000px;height:300px;top: 400px;left: 100px"></div>
+    </div>
 </div>
-<div style="position: fixed;top: 10%;left: 10%;color: #b2b2b2">
-    <table id="demo" lay-filter="test"></table>
-</div>
-
-<div id="main" style="width: 1000px;height:300px;top: 400px;left: 100px"></div>
-
 <!-----------------------以下是js------------------------>
 <script>
 

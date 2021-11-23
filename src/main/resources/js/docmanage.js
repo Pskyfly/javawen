@@ -28,6 +28,7 @@ layui.use('table', function(){
         ,url: '/getdocs' //数据接口
         ,page: true //开启分页
         ,dataType:"json"
+        ,even:true
         ,where:{
             title:str
         }
@@ -56,6 +57,7 @@ layui.use('form', function(){
                 , height: 220
                 ,id:'theusers'
                 , url: "/getdocs"//数据接口
+                ,even:true
                 ,where:{
                     title:str
                 }

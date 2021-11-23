@@ -5,6 +5,7 @@ layui.use('table', function () {
     table.render({
         elem: '#demo'
         ,id:'theusers'
+        , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
         ,where:{
             name:str
         }
@@ -12,12 +13,12 @@ layui.use('table', function () {
         , page: true //开启分页
         , cols: [[ //表头
             { field: 'id', title: 'ID', width: 100, sort: true }
-            , { field: 'name', title: '学生姓名', width: 100 }
-            , { field: 'password', title: '学生密码', width: 100 }
-            , { field: 'email', title: '学生邮箱', width: 200 }
-            , { field: 'birthday', title: '学生生日', width: 110 }
-            , { field: 'money', title: '学生余额', width: 110 }
-            , { field: '编辑', toolbar: '#barDemo' }
+            , { field: 'name', title: '学生姓名'}
+            , { field: 'password', title: '学生密码'}
+            , { field: 'email', title: '学生邮箱'}
+            , { field: 'birthday', title: '学生生日'}
+            , { field: 'money', title: '学生余额'}
+            , { field: '编辑', toolbar: '#barDemo',width: 150 }
         ]]
     });
     return false;
@@ -33,19 +34,21 @@ layui.use('form', function(){
                 elem: '#demo'
                 ,id:'theusers'
                 , url: "/list"//数据接口
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,method:'post'
+                ,even:true
                 ,where:{
                     name:str
                 }
                 , page: true //开启分页
                 , cols: [[ //表头
                     { field: 'id', title: 'ID', width: 100, sort: true }
-                    , { field: 'name', title: '学生姓名', width: 100 }
-                    , { field: 'password', title: '学生密码', width: 100 }
-                    , { field: 'email', title: '学生邮箱', width: 200 }
-                    , { field: 'birthday', title: '学生生日', width: 110 }
-                    , { field: 'money', title: '学生余额', width: 110 }
-                    , { field: '编辑', toolbar: '#barDemo' }
+                    , { field: 'name', title: '学生姓名'}
+                    , { field: 'password', title: '学生密码'}
+                    , { field: 'email', title: '学生邮箱'}
+                    , { field: 'birthday', title: '学生生日'}
+                    , { field: 'money', title: '学生余额'}
+                    , { field: '编辑', toolbar: '#barDemo',width: 150 }
                 ]]
             });
         });
@@ -66,6 +69,7 @@ table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，tes
             $.ajax({
                 url:"/delete",
                 type:"delete",
+                even:true,
                 dataType:"json",
                 data:{
                     name:data.name

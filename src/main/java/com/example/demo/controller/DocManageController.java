@@ -194,6 +194,15 @@ public class DocManageController {
         resultMap.put("message","已经确认当前操作的文档");
         return resultMap;
     }
+    @RequestMapping(value="/getoperatingdoc",method= RequestMethod.GET)
+    @ResponseBody
+    public Object getOperatingDoc()
+    {
+        resultMap.put("data",Tools.operatingDoc);
+        resultMap.put("status",200);
+        resultMap.put("message","已经确认当前操作的文档");
+        return resultMap;
+    }
     @RequestMapping(value="/getwriterdata",method= RequestMethod.GET)
     @ResponseBody
     public Object getWriters()

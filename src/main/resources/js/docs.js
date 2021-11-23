@@ -35,6 +35,7 @@ layui.use('table', function () {
         elem: '#demo'
         , height: 250
         ,id:'theusers'
+        ,even:true
         ,where:{
             name:str
         }
