@@ -95,6 +95,7 @@ layui.use('form', function () {
                 },
                 success:function (result) {
                     alert(result.message);
+                    window.location.reload();
                 },
                 error:function (){
                     alert("未知错误");

@@ -29,51 +29,46 @@ public class PersonController {
         resultMap.clear();
         resultMap.put("status","200");
         resultMap.put("message","返回当前登录的用户");
-        resultMap.put("data",session.getAttribute("user"));
+        String username=(String)session.getAttribute("username");
+        resultMap.put("data",userService.findUserbynme(username));
         return resultMap;
     }
     @RequestMapping(value = "/selfupdate",method = RequestMethod.POST)
     @ResponseBody
-    public Object Selfupdate(UserT user){
+    public Object Selfupdate(UserT user,HttpSession session){
         resultMap.clear();
-        if(userService.findUserbynme(user.getName())!=null&& !Objects.equals(user.getName(), nowUser.nowuser.getName()))
-        {
-            resultMap.put("status",500);
-            resultMap.put("message","用户名重复");
-            return resultMap;
-        }
-        else {
-            user.setId(nowUser.nowuser.getId());
-            user.setPassword(nowUser.nowuser.getPassword());
-            userService.updateUser(user);
-            resultMap.put("status", 200);
-            resultMap.put("message", "个人信息修改成功");
-            nowUser.setUser(user);
-            return resultMap;
-        }
+        UserT auser=userService.findUserbynme(user.getName());
+        user.setId(auser.getId());
+        user.setPassword(auser.getPassword());
+        userService.updateUser(user);
+        session.setAttribute("username",user.getName());
+        resultMap.put("status", 200);
+        resultMap.put("message", "个人信息修改成功");
+        return resultMap;
     }
 
     @RequestMapping(value = "/selfpassword",method = RequestMethod.POST)
     @ResponseBody
-    public Object Selfpassword(String password){
+    public Object Selfpassword(String password,HttpSession session){
         resultMap.clear();
-        UserT user=userService.findUserbynme(nowUser.nowuser.getName());
+        String username=(String)session.getAttribute("username");
+        UserT user=userService.findUserbynme(username);
         user.setPassword(password);
         userService.updateUser(user);
         resultMap.put("status",200);
         resultMap.put("message","个人信息修改成功");
-        nowUser.setUser(user);
         return resultMap;
     }
 
     @RequestMapping(value = "/updatepassword",method = RequestMethod.POST)
     @ResponseBody
-    public Object Updatepassword(String lastpassword,String newpassword){
+    public Object Updatepassword(String lastpassword,String newpassword,HttpSession session){
         resultMap.clear();
-        if(Objects.equals(lastpassword, nowUser.nowuser.getPassword()))
+        UserT user=userService.findUserbynme((String)session.getAttribute("username"));
+        if(Objects.equals(lastpassword, user.getPassword()))
         {
-            nowUser.nowuser.setPassword(newpassword);
-            userService.updateUser(nowUser.nowuser);
+            user.setPassword(newpassword);
+            userService.updateUser(user);
             resultMap.put("status",200);
             resultMap.put("message","修改密码成功");
         }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Controller
@@ -115,27 +116,18 @@ public class UserListController {
     {
         UserT auser=userService.findUserbynme(user.getName());
         resultMap.clear();
-        if(auser!=null)
-        {
-            resultMap.put("status",1);
-            resultMap.put("message","修改失败,用户名已经存在");
-            return resultMap;
-        }
-        else {
-            user.setId(Tools.operatingUser.getId());
-            Tools.operatingUser.copyuser(user);
-            userService.updateUser(user);
-            resultMap.put("status",0);
-            resultMap.put("message","修改成功");
-            return resultMap;
-        }
+        user.setId(auser.getId());
+        userService.updateUser(user);
+        resultMap.put("status",0);
+        resultMap.put("message","修改成功");
+        return resultMap;
     }
 
     @RequestMapping(value="/prechoose",method= RequestMethod.POST)
     @ResponseBody
-    public Object preChooseuser(String name)
+    public Object preChooseuser(String name, HttpSession session)
     {
-        Tools.operatingUser.copyuser(userService.findUserbynme(name));
+        session.setAttribute("operatinguser",name);
         return 0;
     }
 

@@ -75,8 +75,6 @@ public class LoginController {
     public Object checklog(HttpSession session){
         resultMap.clear();
         Object logstatus=session.getAttribute("status");
-        //System.out.println(logstatus);
-        System.out.println(session.getAttribute("username"));
         if(logstatus== null||(int)logstatus==0)
         {
             resultMap.put("logstatus",0);
