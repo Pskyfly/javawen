@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.bean.UserT;
 import com.example.demo.service.UserService;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,9 +74,10 @@ public class LoginController {
     @ResponseBody
     public Object checklog(HttpSession session){
         resultMap.clear();
-        int logstatus= (int) session.getAttribute("status");
+        Object logstatus=session.getAttribute("status");
         //System.out.println(logstatus);
-        if(logstatus==0)
+        System.out.println(session.getAttribute("username"));
+        if(logstatus== null||(int)logstatus==0)
         {
             resultMap.put("logstatus",0);
             resultMap.put("message","未登录");

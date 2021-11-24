@@ -13,7 +13,6 @@ $(document).ready(function () {
         dataType: "json",
         success:function (result) {
             var ret=result.data;
-            if(ret.name==null) return false;
             var name,password,email,money,birthday;
             name=ret.name;
             password=ret.password;
