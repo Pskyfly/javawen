@@ -15,6 +15,7 @@ public interface  UserService {
     void updateUser(UserT user);
 //  -------------------------------------------
     List<Userwrites> getWriterList();
+    List<Doc> getsimilarDocList(String content);
     Userwrites getWriterbyname(String username);
     List<Doc> getDocListbyname(String username);
     void deleteDocbyid(int id);
@@ -22,4 +23,5 @@ public interface  UserService {
     void updateWriter(Userwrites writer);
     void addDoc(Doc doc);
     void updateDoc(Doc doc);
+
 }

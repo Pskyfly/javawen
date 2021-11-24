@@ -2,10 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.bean.UserT;
 import com.example.demo.service.UserService;
-import com.example.demo.tools.nowUser;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;

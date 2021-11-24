@@ -17,9 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.example.demo.tools.nowUser.logstatus;
-import static com.example.demo.tools.nowUser.nowuser;
-
 @Controller
 public class LoginController {
 
@@ -44,7 +41,7 @@ public class LoginController {
         {
             resultMap.put("status", 500);
             resultMap.put("message", "登录失败");
-            logstatus=0;
+            session.setAttribute("status",0);
         }
         return resultMap;
     }

@@ -60,6 +60,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Doc> getsimilarDocList(String content) {
+        content='%'+content+'%';
+        return docMapper.getsimilardocList(content);
+    }
+
+    @Override
     public Userwrites getWriterbyname(String username) {
         return docMapper.getWriterbyname(username);
     }

@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface DocMapper {
     List<Userwrites> getWriterList();
+    List<Doc> getsimilardocList(String content);
     Userwrites getWriterbyname(String username);
     void updateWriter(Userwrites writer);
     List<Doc> getDoclistbywriter(String username);

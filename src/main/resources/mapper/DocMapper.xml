@@ -27,4 +27,7 @@
     <select id="updateDoc" parameterType="com.example.demo.bean.Doc">
         update docs set title=#{title},content=#{content} where id=#{id}
     </select>
+    <select id="getsimilardocList" parameterType="String" resultType="com.example.demo.bean.Doc">
+        select * from docs where title like #{content} or content like #{content}
+    </select>
 </mapper>

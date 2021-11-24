@@ -59,7 +59,7 @@ public class DocManageController {
 
     @RequestMapping(value="/setOperatingWriter",method= RequestMethod.GET)
     @ResponseBody
-    public Object setOperating(String name, HttpSession session)
+    public Object setOperatingWriter(String name, HttpSession session)
     {
         resultMap.clear();
         Userwrites writer=userService.getWriterbyname(name);
@@ -78,7 +78,7 @@ public class DocManageController {
     }
     @RequestMapping(value="/getOperatingWriter",method= RequestMethod.GET)
     @ResponseBody
-    public Object getOperating(HttpSession session)
+    public Object getOperatingWriter(HttpSession session)
     {
         resultMap.clear();
 
@@ -115,14 +115,7 @@ public class DocManageController {
         }
         else
         {
-            List<Doc> some=new ArrayList<Doc>();
-            for (int i=0;i<docs.size();i++)
-            {
-                if(Objects.equals(docs.get(i).getTitle(), title)||title==null)
-                {
-                    some.add(docs.get(i));
-                }
-            }
+            List<Doc> some=userService.getsimilarDocList(title);
             resultMap.put("count",some.size());
             resultMap.put("data",Tools.docBuildPage(some,limit,page));
             resultMap.put("message","找到了记录");
@@ -151,18 +144,19 @@ public class DocManageController {
         }
         return resultMap;
     }
-// -----------------------上次做到这里--------------------------------------
     @RequestMapping(value="/addDoc",method= RequestMethod.POST)
     @ResponseBody
-    public Object addDoc(String title,String content)
+    public Object addDoc(String title,String content,HttpSession session)
     {
         resultMap.clear();
         Doc doc=new Doc();
         doc.setTitle(title);
         doc.setContent(content);
-        doc.setUsername(Tools.operatingwriter.getUsername());//给文章赋予作者
-        Tools.operatingwriter.setCount(Tools.operatingwriter.getCount()+1);//当前作者文章数量加一
-        userService.updateWriter(Tools.operatingwriter);//修改数据库
+        String writername=(String)session.getAttribute("writername");
+        doc.setUsername(writername);//给文章赋予作者
+        Userwrites userwrites=userService.getWriterbyname(writername);
+        userwrites.setCount(userwrites.getCount()+1);//当前作者文章数量加一
+        userService.updateWriter(userwrites);//修改数据库
         userService.addDoc(doc);
         resultMap.put("status",200);
         resultMap.put("message","添加成功");
@@ -170,14 +164,14 @@ public class DocManageController {
     }
     @RequestMapping(value="/updateDoc",method= RequestMethod.POST)
     @ResponseBody
-    public Object updateDoc(String title,String content)
+    public Object updateDoc(String title,String content,HttpSession session)
     {
         resultMap.clear();
         Doc doc=new Doc();
         doc.setTitle(title);
         doc.setContent(content);
-        doc.setUsername(Tools.operatingwriter.getUsername());//给文章赋予作者
-        doc.setId(Tools.operatingDoc.getId());
+        doc.setUsername((String)session.getAttribute("writername"));//给文章赋予作者
+        doc.setId((int)session.getAttribute("docid"));
         userService.updateDoc(doc);
         resultMap.put("data",doc);
         resultMap.put("status",200);
@@ -186,22 +180,19 @@ public class DocManageController {
     }
     @RequestMapping(value="/prechoosedoc",method= RequestMethod.POST)
     @ResponseBody
-    public Object prechooseDoc(int id)
+    public Object prechooseDoc(int id,HttpSession session)
     {
-        Doc doc=userService.findDocbyid(id);
-        Tools.operatingDoc.setContent(doc.getContent());
-        Tools.operatingDoc.setTitle(doc.getTitle());
-        Tools.operatingDoc.setUsername(Tools.operatingwriter.getUsername());
-        Tools.operatingDoc.setId(id);
+        session.setAttribute("docid",id);
         resultMap.put("status",200);
         resultMap.put("message","已经确认当前操作的文档");
         return resultMap;
     }
     @RequestMapping(value="/getoperatingdoc",method= RequestMethod.GET)
     @ResponseBody
-    public Object getOperatingDoc()
+    public Object getOperatingDoc(HttpSession session)
     {
-        resultMap.put("data",Tools.operatingDoc);
+        int docid=(int)session.getAttribute("docid");
+        resultMap.put("data",userService.findDocbyid(docid));
         resultMap.put("status",200);
         resultMap.put("message","已经确认当前操作的文档");
         return resultMap;
