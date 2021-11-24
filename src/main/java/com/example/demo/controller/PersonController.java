@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -24,12 +25,11 @@ public class PersonController {
 
     @RequestMapping(value = "/loginuser",method = RequestMethod.GET)
     @ResponseBody
-    public Object SelfInfo(){
+    public Object SelfInfo(HttpSession session){
         resultMap.clear();
-        UserT user =userService.findUserbynme(nowUser.nowuser.getName());
         resultMap.put("status","200");
         resultMap.put("message","返回当前登录的用户");
-        resultMap.put("data",user);
+        resultMap.put("data",session.getAttribute("user"));
         return resultMap;
     }
     @RequestMapping(value = "/selfupdate",method = RequestMethod.POST)

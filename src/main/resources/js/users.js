@@ -27,8 +27,8 @@ layui.use('table', function () {
 layui.use('form', function(){
     var form = layui.form;
     form.on('submit(findname)', function(data){
-        dat=document.getElementById("find");
-        str= dat.findbyname.value;
+        dat=document.getElementById("findbyname");
+        str= dat.value;
         layui.use('table', function () {
             table.render({
                 elem: '#demo'

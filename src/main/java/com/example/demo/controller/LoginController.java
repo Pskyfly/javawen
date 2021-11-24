@@ -2,14 +2,17 @@ package com.example.demo.controller;
 
 import com.example.demo.bean.UserT;
 import com.example.demo.service.UserService;
-import com.example.demo.tools.nowUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -24,17 +27,23 @@ public class LoginController {
 
     protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
+    @RequestMapping(value="/login")
+    public ModelAndView login(){
+        ModelAndView  model = new ModelAndView("login");
+        return model;
+    }
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public Object Login(String name, String password, ModelMap modelMap){
+    public Object Login(String name, String password,HttpSession session){
         UserT user = userService.loginin(name, password);
         resultMap.clear();
         if(user!=null) {
             resultMap.put("status", 200);
             resultMap.put("message", "登录成功");
             resultMap.put("id", "" + user.getId());
-            logstatus=1;
-            nowuser.copyuser(user);
+            session.setAttribute("username", name);
+            session.setAttribute("status",1);
         }
         else
         {
@@ -44,20 +53,28 @@ public class LoginController {
         }
         return resultMap;
     }
-
-    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    @RequestMapping(value="/logout",method =RequestMethod.GET)
     @ResponseBody
-    public Object Logout(){
-        logstatus=0;
-        resultMap.put("message","退出成功");
-        resultMap.put("status",200);
+    public Map<String,Object> logout(SessionStatus sessionStatus,HttpSession session){
+        try {
+            resultMap.clear();
+            //session.removeAttribute("user");
+            session.setAttribute("status",0);
+            resultMap.put("status", 200);
+            resultMap.put("message","退出成功");
+        }
+        catch (Exception e) {
+            resultMap.put("status", 500);
+        }
         return resultMap;
     }
 
     @RequestMapping(value = "/getlogstatus",method = RequestMethod.GET)
     @ResponseBody
-    public Object checklog(){
+    public Object checklog(HttpSession session){
         resultMap.clear();
+        int logstatus= (int) session.getAttribute("status");
+        //System.out.println(logstatus);
         if(logstatus==0)
         {
             resultMap.put("logstatus",0);

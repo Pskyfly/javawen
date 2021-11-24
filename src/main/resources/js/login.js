@@ -17,8 +17,10 @@ layui.use('form', function (message) {
                 password:password,
             },
             success:function (result) {
-                if(result.status==200)
+                if(result.status==200) {
                     window.location.assign("main.html");
+                    //window.location.href = baseUrl+"/main";
+                }
                 else
                 {
                     alert("用户名密码错误");

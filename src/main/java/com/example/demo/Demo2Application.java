@@ -16,12 +16,12 @@ public class Demo2Application {
         SpringApplication.run(Demo2Application.class, args);
     }
 
-    @RestController
-    @RequestMapping
-    class Test {
-        @GetMapping("/session")
-        public String session(HttpServletRequest request) {
-            return "session: " + request.getSession().getId() + "  port: " + request.getServerPort();
-        }
-    }
+//    @RestController
+//    @RequestMapping
+//    class Test {
+//        @GetMapping("/session")
+//        public String session(HttpServletRequest request) {
+//            return "session: " + request.getSession().getId() + "  port: " + request.getServerPort();
+//        }
+//    }
 }
