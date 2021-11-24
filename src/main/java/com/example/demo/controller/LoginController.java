@@ -28,12 +28,6 @@ public class LoginController {
 
     protected Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
-    @RequestMapping(value="/login")
-    public ModelAndView login(){
-        ModelAndView  model = new ModelAndView("login");
-        return model;
-    }
-
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public Object Login(String name, String password,HttpSession session){

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Controller
@@ -58,7 +59,7 @@ public class DocManageController {
 
     @RequestMapping(value="/setOperatingWriter",method= RequestMethod.GET)
     @ResponseBody
-    public Object setOperating(String name)
+    public Object setOperating(String name, HttpSession session)
     {
         resultMap.clear();
         Userwrites writer=userService.getWriterbyname(name);
@@ -69,7 +70,7 @@ public class DocManageController {
         }
         else
         {
-            Tools.operatingwriter.copyWriter(writer);
+            session.setAttribute("writername",name);
             resultMap.put("status",200);
             resultMap.put("message","找到该作者");
         }
@@ -77,11 +78,11 @@ public class DocManageController {
     }
     @RequestMapping(value="/getOperatingWriter",method= RequestMethod.GET)
     @ResponseBody
-    public Object getOperating()
+    public Object getOperating(HttpSession session)
     {
         resultMap.clear();
 
-        if(Tools.operatingUser==null)
+        if(session.getAttribute("writername")==null)
         {
             resultMap.put("status",500);
             resultMap.put("message","未获取当前作者");
@@ -90,7 +91,7 @@ public class DocManageController {
         {
             resultMap.put("status",200);
             resultMap.put("message","获取当前作者");
-            String name=Tools.operatingwriter.getUsername();
+            String name=(String)session.getAttribute("writername");
             resultMap.put("data",userService.findUserbynme(name));
         }
         return resultMap;
@@ -98,13 +99,13 @@ public class DocManageController {
 
     @RequestMapping(value="/getdocs",method= RequestMethod.GET)
     @ResponseBody
-    public Object getUserList(int page, int limit,String title)
+    public Object getUserList(int page, int limit,String title,HttpSession session)
     {
         resultMap.clear();
         resultMap.put("status", 200);
         resultMap.put("code", 0);
-//        String name=Tools.lastquery;
-        List<Doc> docs = userService.getDocListbyname(Tools.operatingwriter.getUsername());
+        String writer=(String)session.getAttribute("writername");
+        List<Doc> docs = userService.getDocListbyname(writer);
         if(Objects.equals(title, "")) {
             Object some = Tools.docBuildPage(docs, limit, page);
             resultMap.put("data", some);
@@ -130,7 +131,7 @@ public class DocManageController {
     }
     @RequestMapping(value="/deletedoc",method= RequestMethod.DELETE)
     @ResponseBody
-    public Object deleteDoc(int id)
+    public Object deleteDoc(int id,HttpSession session)
     {
         resultMap.clear();
         if(userService.findDocbyid(id)!=null)
@@ -138,9 +139,10 @@ public class DocManageController {
             userService.deleteDocbyid(id);
             resultMap.put("status",200);
             resultMap.put("message","删除成功");
-            int lcount=Tools.operatingwriter.getCount();
-            Tools.operatingwriter.setCount(lcount-1);
-            userService.updateWriter(Tools.operatingwriter);
+            Userwrites writer=userService.getWriterbyname((String)session.getAttribute("writername"));
+            int lcount=writer.getCount();
+            writer.setCount(lcount-1);
+            userService.updateWriter(writer);
         }
         else
         {
@@ -149,6 +151,7 @@ public class DocManageController {
         }
         return resultMap;
     }
+// -----------------------上次做到这里--------------------------------------
     @RequestMapping(value="/addDoc",method= RequestMethod.POST)
     @ResponseBody
     public Object addDoc(String title,String content)
